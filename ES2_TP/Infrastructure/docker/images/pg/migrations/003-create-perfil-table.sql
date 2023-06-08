@@ -1,5 +1,5 @@
 create table perfil(
-    id uuid constraint experiencia_pk primary key default uuid_generate_v4(),
+    id_perfil uuid constraint experiencia_pk primary key default uuid_generate_v4(),
     nome_perfil varchar(100) not null,
     pais varchar(100) not null,
     email varchar(100) not null,
