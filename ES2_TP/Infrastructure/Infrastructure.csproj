@@ -25,6 +25,33 @@
       <None Update="docker\images\pg\migrations\004-seed-data.sql">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
+      <None Update="docker\images\pg\migrations\002-create-experiencia-table.sql">
+         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="docker\images\pg\migrations\003-create-perfil-table.sql">
+         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+        <None Update="docker\images\pg\migrations\004-create-areaProfissional-table.sql">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="docker\images\pg\migrations\005-create-skills-table.sql">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="docker\images\pg\migrations\006-create-skillsProf-table.sql">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="docker\images\pg\migrations\007-create-tipoUtilizador-table.sql">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="docker\images\pg\migrations\008-create-utilizador-table.sql">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="docker\images\pg\migrations\009-create-propostas-table.sql">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="docker\images\pg\migrations\010-create-skillsProposta-table.sql">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
     </ItemGroup>
 
 </Project>
