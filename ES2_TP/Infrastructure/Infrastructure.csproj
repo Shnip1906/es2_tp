@@ -1,0 +1,73 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <AssemblyName>Infrastructure</AssemblyName>
+        <RootNamespace>IPVC.ESTG.ES2</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <None Update=".env.example">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="docker-compose.yml">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="docker\images\pg\Dockerfile">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="docker\images\pg\migrations\001-init.sql">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="docker\images\pg\migrations\004-seed-data.sql">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="docker\images\pg\migrations\002-create-experiencia-table.sql">
+         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="docker\images\pg\migrations\003-create-perfil-table.sql">
+         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+        <None Update="docker\images\pg\migrations\004-create-areaProfissional-table.sql">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="docker\images\pg\migrations\005-create-skills-table.sql">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="docker\images\pg\migrations\006-create-skillsProf-table.sql">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="docker\images\pg\migrations\007-create-tipoUtilizador-table.sql">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="docker\images\pg\migrations\008-create-utilizador-table.sql">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="docker\images\pg\migrations\009-create-propostas-table.sql">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="docker\images\pg\migrations\010-create-skillsProposta-table.sql">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.5" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.5">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.5" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.5" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.5">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+      <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.6" />
+      <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.4" />
+    </ItemGroup>
+
+</Project>
