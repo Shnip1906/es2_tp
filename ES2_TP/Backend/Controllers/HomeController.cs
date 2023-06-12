@@ -13,28 +13,15 @@ public class HomeController : Controller
     private readonly ILogger<HomeController> _logger;
     private readonly MyDbContext _context;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger, MyDbContext context)
     {
         _logger = logger;
+        _context = context;
     }
 
     public IActionResult Index()
     {
         var db = new MyDbContext();
-        var db2 = new MyDbContext();
-        var db3 = new MyDbContext();
-        var db4 = new MyDbContext();
-        var isthere = db.Utilizadors.FirstOrDefault();
-        if (isthere == null)
-        {
-            Utilizador user = new Utilizador();
-            user.NomeUtilizador = "admin";
-            user.Username = "admin";
-            user.TipoUtilizador = 1;
-            user.Password = "admin";
-            db.Utilizadors.Add(user);
-            db.SaveChanges();
-        }
 
        /* var isthere2 = db.AreaProfissionals.FirstOrDefault();
         if (isthere2 == null)
