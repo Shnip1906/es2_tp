@@ -24,7 +24,7 @@ public class LoginController : Controller
         IEnumerable<Utilizador> users = db.Utilizadors;
         foreach (var u in users)
         {
-            if ((username.Equals(u.Username)) && password.Equals(u.Password) && u.Tipo == 1)
+            if ((username.Equals(u.Username)) && password.Equals(u.Password) && u.TipoUtilizador == 1)
             {
                 // ADMIN
                 user = u;
@@ -32,14 +32,14 @@ public class LoginController : Controller
                 //Global.counter = u.IdUsers;
                 return View(users);
             }
-            if ((username.Equals(u.Username)) && password.Equals(u.Password) && u.Tipo == 2)
+            if ((username.Equals(u.Username)) && password.Equals(u.Password) && u.TipoUtilizador == 2)
             {
                 //Global.counter = u.IdUsers;
                 //User Manager
                 user = u;
                 return RedirectToAction(controllerName:"userManager", actionName: "IndexUManager");
             }
-            if ((username.Equals(u.Username)) && password.Equals(u.Password) && u.Tipo == 3)
+            if ((username.Equals(u.Username)) && password.Equals(u.Password) && u.TipoUtilizador == 3)
             {
                 ViewBag.id = u.IdUtilizador; 
                 //Global.counter = u.IdUsers;

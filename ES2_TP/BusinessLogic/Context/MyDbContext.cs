@@ -30,13 +30,11 @@ public partial class MyDbContext : DbContext
 
     public virtual DbSet<Skillspropostum> Skillsproposta { get; set; }
 
-    public virtual DbSet<Tipoutilizador> Tipoutilizadors { get; set; }
-
     public virtual DbSet<Utilizador> Utilizadors { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseNpgsql("Host=localhost;Database=es2;Username=es2;Password=es2;SearchPath=public;Port=55614;");
+        => optionsBuilder.UseNpgsql("Host=localhost;Database=es2;Username=es2;Password=es2;Port=49938");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -196,20 +194,6 @@ public partial class MyDbContext : DbContext
                 .HasConstraintName("skillsproposta_id_skills_fkey");
         });
 
-        modelBuilder.Entity<Tipoutilizador>(entity =>
-        {
-            entity.HasKey(e => e.IdTipoUtilizador).HasName("tipoutilizador_pkey");
-
-            entity.ToTable("tipoutilizador");
-
-            entity.Property(e => e.IdTipoUtilizador)
-                .HasDefaultValueSql("uuid_generate_v4()")
-                .HasColumnName("id_tipo_utilizador");
-            entity.Property(e => e.TipoUtilizador1)
-                .HasMaxLength(100)
-                .HasColumnName("tipo_utilizador");
-        });
-
         modelBuilder.Entity<Utilizador>(entity =>
         {
             entity.HasKey(e => e.IdUtilizador).HasName("utilizador_pkey");
@@ -219,14 +203,16 @@ public partial class MyDbContext : DbContext
             entity.Property(e => e.IdUtilizador)
                 .HasDefaultValueSql("uuid_generate_v4()")
                 .HasColumnName("id_utilizador");
-            entity.Property(e => e.IdTipoUtilizador).HasColumnName("id_tipo_utilizador");
             entity.Property(e => e.NomeUtilizador)
                 .HasMaxLength(100)
                 .HasColumnName("nome_utilizador");
-
-            entity.HasOne(d => d.IdTipoUtilizadorNavigation).WithMany(p => p.Utilizadors)
-                .HasForeignKey(d => d.IdTipoUtilizador)
-                .HasConstraintName("utilizador_id_tipo_utilizador_fkey");
+            entity.Property(e => e.Password)
+                .HasMaxLength(100)
+                .HasColumnName("password");
+            entity.Property(e => e.TipoUtilizador).HasColumnName("tipo_utilizador");
+            entity.Property(e => e.Username)
+                .HasMaxLength(100)
+                .HasColumnName("username");
         });
 
         OnModelCreatingPartial(modelBuilder);

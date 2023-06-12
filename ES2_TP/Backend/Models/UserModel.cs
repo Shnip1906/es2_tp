@@ -9,7 +9,7 @@ public class UsersModel
         this.Nome = user.NomeUtilizador;
         this.username = user.Username;
         this.Password = user.Password;
-        this.tipo = (int)user.Tipo;
+        this.tipo = (int)user.TipoUtilizador;
     }
 
     [EmailAddress]

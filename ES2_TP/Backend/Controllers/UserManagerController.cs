@@ -27,8 +27,8 @@ public class UserManagerController : Controller{
         
     public async Task<IActionResult> Index()
     {
-        var myDbContext = _context.Utilizadors.Where(f => f.Tipo == 3 );
-        return View(await myDbContext.OrderBy(u => u.Nome).ToListAsync());
+        var myDbContext = _context.Utilizadors.Where(f => f.TipoUtilizador == 3 );
+        return View(await myDbContext.OrderBy(u => u.NomeUtilizador).ToListAsync());
     }
     public IActionResult Registar([FromForm] string nome, [FromForm] string username,[FromForm] string password)
     {
@@ -44,7 +44,7 @@ public class UserManagerController : Controller{
         Utilizador users = new Utilizador();
         users.Username = username;
         users.Password = password;
-        users.Tipo = 3;
+        users.TipoUtilizador = 3;
         users.NomeUtilizador = nome;
         db.Utilizadors.Add(users);
         db.SaveChanges();

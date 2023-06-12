@@ -3,5 +3,5 @@ create table utilizador(
    username varchar(100) not null,
    password varchar(100) not null,
    nome_utilizador varchar(100) not null,
-   tipo_utilizador int not null,
+   tipo_utilizador int not null
 );

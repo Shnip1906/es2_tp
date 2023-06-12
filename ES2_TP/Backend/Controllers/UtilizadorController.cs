@@ -17,11 +17,11 @@ public class UtilizadorController : Controller
         _context = new MyDbContext();
     }
 
-    public async Task<IActionResult> IndexUser( int id)
+    public async Task<IActionResult> IndexUser( Guid id)
     {
         ViewBag.Id = id;
         var myDbContext = _context.Utilizadors.Where(f => f.IdUtilizador == id);
-        return View(await myDbContext.OrderBy(u => u.Nome).ToListAsync());
+        return View(await myDbContext.OrderBy(u => u.NomeUtilizador).ToListAsync());
        
     }
     
@@ -35,7 +35,7 @@ public class UtilizadorController : Controller
         return View(await myDbContext.OrderBy(u => u.IdClienteNavigation.Nome).ToListAsync());
     }*/
 
-    public async Task<IActionResult> ListarSkillTalento(int id)
+    /*public async Task<IActionResult> ListarSkillTalento(int id)
     {
         ViewBag.Id = id;
         var myDbContext = _context.TalentSkills.Where(t => t.FkIdTalento == id).Include(t => t.FkIdSkillNavigation);
@@ -350,6 +350,6 @@ public class UtilizadorController : Controller
 
         return RedirectToAction("Cliente3");
     }
-    
+    */
     
 }
