@@ -40,16 +40,13 @@
         <None Update="docker\images\pg\migrations\006-create-skillsProf-table.sql">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
-        <None Update="docker\images\pg\migrations\007-create-tipoUtilizador-table.sql">
+        <None Update="docker\images\pg\migrations\007-create-utilizador-table.sql">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
-        <None Update="docker\images\pg\migrations\008-create-utilizador-table.sql">
+        <None Update="docker\images\pg\migrations\008-create-propostas-table.sql">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
-        <None Update="docker\images\pg\migrations\009-create-propostas-table.sql">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </None>
-        <None Update="docker\images\pg\migrations\010-create-skillsProposta-table.sql">
+        <None Update="docker\images\pg\migrations\009-create-skillsProposta-table.sql">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
     </ItemGroup>

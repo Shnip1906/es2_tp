@@ -1,0 +1,50 @@
+@model Backend.Models.LoginModel
+
+@{
+    Layout = null;
+}
+@{
+    ViewData["Title"] = "Login";
+    var hasError = ViewData["HasError"] as bool? ?? false;
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+
+<html>
+
+
+<h1 class="text-center">Login</h1>
+
+<hr />
+<div class="row" >
+    <div class="col-md-5"  >  
+       
+        <form asp-action="IndexAdmin" style=" width: 50vw; margin-left : 20vw;" >
+        
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="username" class="control-label"> Username</label>
+                <input asp-for="username" type="text" class="form-control"/>
+                <span asp-validation-for="username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" type="password" class="form-control"/>
+            </div>
+            <br/>
+            <div class="form-group, text-center" >
+                <input type="submit" value="Login" class="btn btn-primary"/>
+            </div>
+        </form>
+
+        @if (hasError)
+        {
+            <p style="color: red;">
+                The introduced credentials are invalid
+            </p>
+        }
+    </div>
+</div>
+
+
+</html>
