@@ -28,22 +28,19 @@ public class LoginController : Controller
             {
                 // ADMIN
                 user = u;
-                
-                //Global.counter = u.IdUsers;
                 return View(users);
             }
             if ((username.Equals(u.Username)) && password.Equals(u.Password) && u.TipoUtilizador == 2)
             {
-                //Global.counter = u.IdUsers;
                 //User Manager
                 user = u;
                 return RedirectToAction(controllerName:"userManager", actionName: "IndexUManager");
             }
             if ((username.Equals(u.Username)) && password.Equals(u.Password) && u.TipoUtilizador == 3)
             {
-                ViewBag.id = u.IdUtilizador; 
-                //Global.counter = u.IdUsers;
+                //ViewBag.id = u.IdUtilizador; 
                 user = u;
+                // USER
                 return RedirectToAction("IndexUser",  "Utilizador", new {@id=u.IdUtilizador});
             }
             /*if ((username.Equals(u.Username)) && password.Equals(u.Password) && u.Tipo == 4)

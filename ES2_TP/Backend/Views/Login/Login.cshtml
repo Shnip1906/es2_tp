@@ -8,31 +8,23 @@
     var hasError = ViewData["HasError"] as bool? ?? false;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<!DOCTYPE html>
-
-<html>
-
-
 <h1 class="text-center">Login</h1>
 
-<hr />
-<div class="row" >
-    <div class="col-md-5"  >  
-       
-        <form asp-action="IndexAdmin" style=" width: 50vw; margin-left : 20vw;" >
-        
+<div class="row d-flex justify-content-center mt-3" >
+    <div class="col-md-5">
+        <form asp-action="IndexAdmin">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="username" class="control-label"> Username</label>
+                <label asp-for="username" class="control-label"> Utilizador</label>
                 <input asp-for="username" type="text" class="form-control"/>
                 <span asp-validation-for="username" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group mt-2">
                 <label asp-for="Password" class="control-label"></label>
                 <input asp-for="Password" type="password" class="form-control"/>
             </div>
             <br/>
-            <div class="form-group, text-center" >
+            <div class="form-group d-flex justify-content-center" >
                 <input type="submit" value="Login" class="btn btn-primary"/>
             </div>
         </form>
@@ -45,6 +37,3 @@
         }
     </div>
 </div>
-
-
-</html>
