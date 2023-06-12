@@ -22,6 +22,17 @@ public class HomeController : Controller
     public IActionResult Index()
     {
         var db = new MyDbContext();
+        /*var UserDb = db.Utilizadors.FirstOrDefault();
+        if (UserDb == null)
+        {
+            Utilizador user = new Utilizador();
+            user.NomeUtilizador = "admin";
+            user.Username = "admin";
+            user.TipoUtilizador = 1;
+            user.Password = "admin";
+            db.Utilizadors.Add(user);
+            db.SaveChanges();
+        }*/
 
        /* var isthere2 = db.AreaProfissionals.FirstOrDefault();
         if (isthere2 == null)
@@ -51,7 +62,7 @@ public class HomeController : Controller
     
     /*public IActionResult Registo()
     {
-        return View();
+        return RedirectToAction(controllerName:"Registo", actionName: "Index");
     }*/
 
     public IActionResult Privacy()
@@ -59,6 +70,7 @@ public class HomeController : Controller
         return View();
     }
 
+    //Handling errors
     /*[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
@@ -69,15 +81,14 @@ public class HomeController : Controller
     {
         //User user = new User();
         var db = new MyDbContext();
-        User user2 = new User();
-        user2.Username = username;
-        user2.Password = password;
-        user2.Tipo = 3;
-        user2.Nome = nome;
-        db.Users.Add(user2);
+        Utilizador user = new Utilizador();
+        user.Username = username;
+        user.Password = password;
+        user.TipoUtilizador = 3;
+        user.NomeUtilizador = nome;
+        db.Utilizadors.Add(user);
         db.SaveChanges();
-        return RedirectToAction("index");
-    }
-*/
+        return RedirectToAction("Index");
+    }*/
 
 }
