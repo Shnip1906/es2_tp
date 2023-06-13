@@ -1,0 +1,41 @@
+﻿@model BusinessLogic.Entities.Experiencium
+
+@{
+    ViewBag.Title = "Registo";
+    Layout = "_Layout2";
+}
+
+<h2 class="text-center">Criar experiência</h2>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CriarExps">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NomeExperiencia" class="control-label"></label>
+                <input asp-for="NomeExperiencia" class="form-control"/>
+                <span asp-validation-for="NomeExperiencia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NomeEmpresa" class="control-label"></label>
+                <input asp-for="NomeEmpresa" class="form-control"/>
+                <span asp-validation-for="NomeEmpresa" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Anoinicio" class="control-label"></label>
+                <input asp-for="Anoinicio" class="form-control"/>
+                <span asp-validation-for="Anoinicio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Anofim" class="control-label"></label>
+                <input asp-for="Anofim" class="form-control"/>
+                <span asp-validation-for="Anofim" class="text-danger"></span>
+            </div>
+            <input id="Id" name="Id" type="hidden" value="@ViewBag.Id" />
+            <br/>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary"/>
+            </div>
+        </form>
+    </div>
+</div>
+

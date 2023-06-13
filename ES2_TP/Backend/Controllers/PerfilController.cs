@@ -59,8 +59,6 @@ public class PerfilController : Controller
         {
             ViewBag.Id = result.IdPerfil;
             ViewBag.Nome = result.NomePerfil;
-            //ViewBag.teste = result.Nome;
-            //return View("teste");
             ViewBag.Pais = result.Pais;
             ViewBag.Email = result.Email;
             ViewBag.Preco = result.Precohora;
@@ -109,12 +107,14 @@ public class PerfilController : Controller
         return View(await myDbContext.Where(u => u.IdExperiencia == id).OrderBy(u => u.IdExperiencia == id).ToListAsync());
     }
 
+    // Criar Experiencia Page
     public async Task<IActionResult> CriarExp(Guid id)
     {
         ViewBag.Id = id;
         return View();
     }
     
+    // asp-action form Criar Experiencia
     public async Task<IActionResult> CriarExps(int id,[FromForm] string nomeExp, [FromForm] string Empresa,[FromForm] int AnoInicial, [FromForm] int AnoFinal)
     {
         if (AnoInicial > AnoFinal)
@@ -229,7 +229,7 @@ public class PerfilController : Controller
         return View();
     }
 
-    public IActionResult CriarSkillTalentoUm()
+    public IActionResult CriarSkillPerfilUm()
     {
         var item = new List<SelectListItem>();
 
@@ -263,17 +263,6 @@ public class PerfilController : Controller
         tSkillprof.IdPerfil = fkIdTalento;
         db.Skillprofs.Add(tSkillprof);
         db.SaveChanges();
-        
-       /* 
-        var itens2 = new List<SelectListItem>();
-
-        foreach (Talento talentos in _context.Talentos)
-        {
-            itens2.Add(new SelectListItem{Text = talentos.Nome, Value = talentos.Id.ToString()});
-        }
-
-        ViewData["FkIdTalento"] = new SelectList(_context.Talentos, "FkIdTalento", "Talentos");
-        */
         return RedirectToAction("ListarPerfil2");
     }
 }
