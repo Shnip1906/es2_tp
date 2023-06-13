@@ -79,12 +79,12 @@ public class SkillsController : Controller
        
         
     }
-    public async Task<IActionResult> Eliminar(int id)
+    public async Task<IActionResult> Eliminar(Guid id)
     {
-        /*var db = new MyDbContext();
+        var db = new MyDbContext();
         var db2 = new MyDbContext();
-        var isthere = db2.TalentSkills.Where(p => p.FkIdSkill == id).FirstOrDefault();
-        if (isthere != null)
+        var dSkillprof = db.Skillprofs.Where(p => p.IdSkills == id).FirstOrDefault();
+        if (dSkillprof != null)
         {
             return View("erro");
         }
@@ -92,7 +92,7 @@ public class SkillsController : Controller
      
         db.Skills.Attach(result);
         db.Skills.Remove(result);
-        db.SaveChanges();*/
+        db.SaveChanges();
         return RedirectToAction("IndexSkills");
     }
    
@@ -111,10 +111,9 @@ public class SkillsController : Controller
             item.Add(new SelectListItem(text: areaProfissional.NomeAreaPrfossional, value:areaProfissional.IdAreaProfissional.ToString()));
         }
 
-        ViewData["IdProf"] = new SelectList(_context.Areaprofissionals, "IdProf", "Nome");
+        ViewData["IdAreaProfissional"] = new SelectList(_context.Areaprofissionals, "IdAreaProfissional", "NomeAreaPrfossional");
         return View();
-
-    
+        
     }
 
     public IActionResult RegistarUM([FromForm] string nome, [FromForm] Guid fkIdareaProf)
@@ -122,10 +121,10 @@ public class SkillsController : Controller
       
         var db = new MyDbContext();
 
-        Skill skil2 = new Skill();
-        skil2.NomeSkills = nome;
-        skil2.IdAreaProfissional = fkIdareaProf;
-        db.Skills.Add(skil2);
+        Skill skill = new Skill();
+        skill.NomeSkills = nome;
+        skill.IdAreaProfissional = fkIdareaProf;
+        db.Skills.Add(skill);
         db.SaveChanges();
         return RedirectToAction("IndexSkillsManager");
     }

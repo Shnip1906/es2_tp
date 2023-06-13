@@ -1,0 +1,18 @@
+@using Microsoft.AspNetCore.Http
+
+@{
+    ViewBag.Title = "Relatórios";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<h2 class="text-center"> Lista dos relatórios</h2>
+<body>
+<p>
+    <a class="btn btn-primary" asp-area="" asp-action="RelSkill" asp-route-id="@ViewBag.Id">Relatório por Skill</a>
+</p>
+<p>
+    <a class="btn btn-primary" asp-area="" asp-action="RelTalentCountry" asp-route-id="@ViewBag.Id">Relatório por Talento e País</a>
+</p>
+<p>
+    <a class="btn btn-primary" asp-area="" asp-action="PesquisaSkills" asp-route-id="@ViewBag.Id">Pesquisar talentos por skill</a>
+</p>

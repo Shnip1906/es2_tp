@@ -19,17 +19,17 @@
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
                     <li class="nav-item">
-                          <a class="nav-link text-dark" asp-area="" asp-controller="Admins" asp-action="IndexAdmin">Início</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Admins" asp-action="IndexAdmin">Início</a>
                     </li> 
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Admins" asp-action="AreaProfissional" > Área Profissional</a>
                     </li> 
-                      <li class="nav-item">
-                          <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index" > Utilizadores</a>
-                      </li> 
                     <li class="nav-item">
-                                                <a class="nav-link text-dark" asp-area="" asp-controller="Skills" asp-action="IndexSkills">Skills</a>
-                                            </li>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index" > Utilizadores</a>
+                    </li> 
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Skills" asp-action="IndexSkills">Skills</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Talento" asp-action="ListarTalentos">Talentos</a>
                     </li>
@@ -37,22 +37,24 @@
                         <a class="nav-link text-dark" asp-area="" asp-controller="Cliente" asp-action="Cliente">Clientes</a>
                     </li>
                     <li class="nav-item">
-                                            <a class="nav-link text-dark" asp-area="" asp-controller="Relatorio" asp-action="Relatorio">Relatórios</a>
-                                            </li>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Relatorio" asp-action="Relatorio">Relatórios</a>
+                    </li>
                     <li class="nav-item " >
                         <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Sair</a>
-                        </li>
+                    </li>
                     
                 </ul>
             </div>
         </div>
     </nav>
 </header>
-<div class="container">
-    <main role="main" class="pb-3">
-        @RenderBody()
-    </main>
-</div>
+<body>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+</body>
 
 <footer class="border-top footer text-muted">
     <div class="container">
