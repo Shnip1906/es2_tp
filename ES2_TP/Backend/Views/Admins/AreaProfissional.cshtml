@@ -1,0 +1,45 @@
+﻿
+@using Microsoft.AspNetCore.Http
+@model IEnumerable<BusinessLogic.Entities.Areaprofissional>
+@{
+    ViewBag.Title = "Area Profissional";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Lista das Áreas profissionais</title>
+</head>
+<body>
+
+<h1 class="text-center">Lista das Áreas profissionais</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeAreaPrfossional)
+            </th>
+          <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomeAreaPrfossional)
+            </td>
+         
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdAreaProfissional">Editar</a> 
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+
+</body>
+</html>
+

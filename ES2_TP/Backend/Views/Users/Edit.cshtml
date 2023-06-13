@@ -1,0 +1,38 @@
+﻿@model BusinessLogic.Entities.Utilizador
+
+@{
+    ViewBag.Title = "Index"; 
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<html>
+<h2>Editar utilizador</h2>
+<body>
+
+<form asp-action="Edits">
+            
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="NomeUtilizador" class="control-label"></label>
+        <input asp-for="NomeUtilizador" type="text" class="form-control" value="@ViewBag.Nome" />
+        <span asp-validation-for="NomeUtilizador" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Username" class="control-label"></label>
+        <input asp-for="Username" type="text" class="form-control" value="@ViewBag.Username"/>
+        <span asp-validation-for="Username" class="text-danger" ></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Password" class="control-label"></label>
+        <input asp-for="Password" type="text" class="form-control" value="@ViewBag.Password"/>
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+    <br/>
+    <input id="Id" name="Id" type="hidden" value="@ViewBag.Id" />
+    <div class="form-group">
+        <input type="submit" value="Edit" class="btn btn-primary"/>
+    </div>
+</form>
+
+</body>
+</html>

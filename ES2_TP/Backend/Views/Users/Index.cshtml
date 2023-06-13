@@ -1,0 +1,61 @@
+﻿@model IEnumerable<BusinessLogic.Entities.Utilizador>
+
+@{
+    ViewBag.Title = "Index"; 
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Lista dos utilizadores</title>
+</head>
+<body>
+<h1 class="text-center">Lista dos utilizadores</h1>
+<br
+    ++/>
+<p>
+    <a class="btn btn-primary" asp-area="" asp-action="Create">Criar Novo utilizador</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeUtilizador)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Username)
+            </th>
+           <th>
+                @Html.DisplayNameFor(model => model.TipoUtilizador)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomeUtilizador)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoUtilizador)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdUtilizador">Editar</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdUtilizador">Deletar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+﻿@model IEnumerable<BusinessLogic.Entities.Skillprof>
+
+@{
+    ViewBag.Title = "Relatório";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+@ViewBag.cliente
+<h2 class="text-center"> Lista do relatório </h2>
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IdPerfilNavigation.NomePerfil)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdPerfilNavigation.Pais)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdPerfilNavigation.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdPerfilNavigation.Precohora)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdPerfilNavigation.NomePerfil)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdPerfilNavigation.Pais)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdPerfilNavigation.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdPerfilNavigation.Precohora)
+            </td>
+            
+        </tr>
+    }
+    </tbody>
+</table>
