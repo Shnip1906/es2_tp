@@ -20,7 +20,7 @@ public class RegistoController : Controller
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
     
-    public IActionResult Registar([FromForm] string nome, [FromForm] string username,[FromForm] string password)
+    public IActionResult Registar([FromForm] string NomeUtilizador, [FromForm] string username,[FromForm] string password)
     {
         //User user = new User();
         var db = new MyDbContext();
@@ -28,7 +28,7 @@ public class RegistoController : Controller
         user.Username = username;
         user.Password = password;
         user.TipoUtilizador = 3;
-        user.NomeUtilizador = nome;
+        user.NomeUtilizador = NomeUtilizador;
         db.Utilizadors.Add(user);
         db.SaveChanges();
         return RedirectToAction(controllerName:"Home", actionName: "Index");
