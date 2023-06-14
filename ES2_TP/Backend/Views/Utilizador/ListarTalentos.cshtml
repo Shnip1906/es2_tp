@@ -1,0 +1,60 @@
+@model IEnumerable<BusinessLogic.Entities.Perfil>
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout5";
+}
+
+<h1 class="text-center">Lista dos talentos</h1>
+<a class="btn btn-primary" asp-area="" asp-controller="Utilizador" asp-action="CriarTalento">Criar talento</a>
+<table class="table">
+
+    <thead>
+    <tr>
+        <th>
+            <strong>Nome Perfil</strong>
+        </th>
+        <th>
+            <strong>País</strong>
+        </th>
+        <th>
+            <strong>Email</strong>
+        </th>
+        <th>
+            <strong>Preço Hora</strong>
+        </th>
+        <th>
+            <strong>Público</strong>
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomePerfil)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pais)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precohora)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Publico)
+            </td>
+            <td>
+                <a asp-action="EditarPerfil" asp-route-id="@item.IdPerfil">Editar</a>
+            </td>
+
+        </tr>
+    }
+    </tbody>
+</table>
+
+
