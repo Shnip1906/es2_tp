@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<BusinessLogic.Entities.Areaprofissional>
 @{
     ViewBag.Title = "Area Profissional";
-    Layout = "~/Views/Shared/_Layout2.cshtml";
+    Layout = "~/Views/Shared/_Layout4.cshtml";
 }
 
-<h1 class="text-center">Lista das Áreas profissionais</h1>
+<h1 class="text-center">Lista das áreas profissionais</h1>
 <table class="table">
     <thead>
         <tr>
@@ -19,10 +19,6 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.NomeAreaPrfossional)
-            </td>
-         
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdAreaProfissional">Editar</a> 
             </td>
         </tr>
 }
