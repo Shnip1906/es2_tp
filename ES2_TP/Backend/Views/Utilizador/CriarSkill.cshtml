@@ -1,0 +1,21 @@
+@model BusinessLogic.Entities.Skill
+
+@{
+    ViewBag.Title = "title";
+    Layout = "~/Views/Shared/_Layout5.cshtml";
+}
+
+<h2>Criar uma nova Skill</h2>
+
+<form asp-action="RegistarSkill">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="NomeSkills" class="control-label"></label>
+        <input asp-for="NomeSkills" type="text" class="form-control"/>
+        <span asp-validation-for="NomeSkills" class="text-danger"></span>
+    </div>
+    <br/>
+    <div class="form-group">
+        <input type="submit" value="RegistarSkill" class="btn btn-primary"/>
+    </div>
+</form>

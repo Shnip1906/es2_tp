@@ -15,7 +15,7 @@ public partial class Perfil
 
     public double Precohora { get; set; }
 
-    public bool? Publico { get; set; }
+    public bool Publico { get; set; }
 
     public Guid? IdExperiencia { get; set; }
 

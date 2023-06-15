@@ -1,0 +1,39 @@
+@model List<BusinessLogic.Entities.Skill>
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout5";
+}
+
+<h1 class="text-center">Lista das Skills</h1>
+<a class="btn btn-primary" asp-area="" asp-controller="Utilizador" asp-action="CriarSkill">Criar talento</a>
+<table class="table">
+
+    <thead>
+    <tr>
+        <th>
+            <strong>Nome Skill</strong>
+        </th>
+        <th>
+            <strong>Nome Area Profissional</strong>
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomeSkills)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdAreaProfissional)
+            </td>
+            <td>
+                <a asp-action="ElimininarSkill" asp-route-id="@item.IdSkills">Eliminar Skill</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
