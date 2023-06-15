@@ -31,24 +31,6 @@ public class AdminsController : Controller
 
     }
 
-/*
-    public IActionResult Create()
-    {
-        throw new NotImplementedException();
-    }
-
-    public IActionResult Edit()
-    {
-        throw new NotImplementedException();
-    }
-
-    public IActionResult Delete()
-    {
-        throw new NotImplementedException();
-    }
-    */
-
-
     public IActionResult Edit(Guid? id)
     {
         var db = new MyDbContext();

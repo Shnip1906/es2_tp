@@ -1,5 +1,4 @@
-﻿@using Microsoft.AspNetCore.Http
-@model BusinessLogic.Entities.Areaprofissional
+﻿@model BusinessLogic.Entities.Areaprofissional
 @{
     ViewBag.Title = "Area Profissional";
     Layout = "~/Views/Shared/_Layout2.cshtml";
@@ -13,16 +12,15 @@
         <form asp-action="Edits">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
-                <label asp-for="NomeAreaPrfossional" class="control-label"></label>
-                <input asp-for="NomeAreaPrfossional" type="text" class="form-control" value="@ViewBag.Nome" />
-                <span asp-validation-for="NomeAreaPrfossional" class="text-danger"></span>
-            </div>
-
-            <input id="Id" name="Id" type="hidden" value="@ViewBag.Id" />
-            <br/>
-                   <div class="form-group">
-                       <input type="submit" value="Editar" class="btn btn-primary"/>
-          </div>
+            <label asp-for="NomeAreaPrfossional" class="control-label"></label>
+            <input asp-for="NomeAreaPrfossional" type="text" class="form-control" value="@ViewBag.Nome" />
+            <span asp-validation-for="NomeAreaPrfossional" class="text-danger"></span>
+        </div>
+        <input id="Id" name="Id" type="hidden" value="@ViewBag.Id" />
+        <br/>
+        <div class="form-group">
+            <input type="submit" value="Editar" class="btn btn-primary"/>
+        </div>
         </form>
     </div>
 </div>

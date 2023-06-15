@@ -49,7 +49,6 @@ public class RelatorioController : Controller
     }
     public async  Task<IActionResult> RelT([FromForm] string pais)
     {
-        
         var value = 0.0;
         var count = 0;
         var talento = _context.Perfils.Where(p => p.Pais == pais).ToList();
