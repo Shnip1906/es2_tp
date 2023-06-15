@@ -34,7 +34,7 @@ public partial class MyDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseNpgsql("Host=localhost;Database=es2;Username=es2;Password=es2;Port=49938");
+        => optionsBuilder.UseNpgsql("Host=localhost;Database=es2;Username=es2;Password=es2;Port=59007");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -71,12 +71,17 @@ public partial class MyDbContext : DbContext
             entity.Property(e => e.Continuo)
                 .HasDefaultValueSql("false")
                 .HasColumnName("continuo");
+            entity.Property(e => e.IdPerfil).HasColumnName("id_perfil");
             entity.Property(e => e.NomeEmpresa)
                 .HasMaxLength(100)
                 .HasColumnName("nome_empresa");
             entity.Property(e => e.NomeExperiencia)
                 .HasMaxLength(100)
                 .HasColumnName("nome_experiencia");
+
+            entity.HasOne(d => d.IdPerfilNavigation).WithMany(p => p.Experiencia)
+                .HasForeignKey(d => d.IdPerfil)
+                .HasConstraintName("experiencia_id_perfil_fkey");
         });
 
         modelBuilder.Entity<Perfil>(entity =>
@@ -91,7 +96,6 @@ public partial class MyDbContext : DbContext
             entity.Property(e => e.Email)
                 .HasMaxLength(100)
                 .HasColumnName("email");
-            entity.Property(e => e.IdExperiencia).HasColumnName("id_experiencia");
             entity.Property(e => e.NomePerfil)
                 .HasMaxLength(100)
                 .HasColumnName("nome_perfil");
@@ -102,10 +106,6 @@ public partial class MyDbContext : DbContext
             entity.Property(e => e.Publico)
                 .HasDefaultValueSql("false")
                 .HasColumnName("publico");
-
-            entity.HasOne(d => d.IdExperienciaNavigation).WithMany(p => p.Perfils)
-                .HasForeignKey(d => d.IdExperiencia)
-                .HasConstraintName("perfil_id_experiencia_fkey");
         });
 
         modelBuilder.Entity<Proposta>(entity =>

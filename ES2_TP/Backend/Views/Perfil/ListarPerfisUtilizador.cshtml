@@ -1,0 +1,60 @@
+@model IEnumerable<BusinessLogic.Entities.Perfil>
+
+@{
+    ViewBag.Title = "Index"; 
+    Layout = "~/Views/Shared/_Layout5.cshtml";
+}
+
+<h1 class="text-center">Lista dos Perfis</h1>
+<a class="btn btn-primary" asp-area="" asp-controller="Perfil" asp-action="CriarPerfilUtilizador">Criar Perfil</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <strong>Nome Perfil</strong>
+            </th>
+            <th>
+                <strong>País</strong>
+            </th>
+            <th>
+                <strong>Email</strong>
+            </th>
+            <th>
+                <strong>Preço Hora</strong>
+            </th>
+            <th>
+                <strong>Público</strong>
+            </th>
+            <th></th>
+            </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomePerfil)
+            </td>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.Pais)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precohora)
+            </td>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.Publico)
+            </td>
+            <td>
+                <a asp-action="EditarPerfilUtilizador" asp-route-id="@item.IdPerfil">Editar</a> |
+                <a asp-action="EliminarPerfil" asp-route-id="@item.IdPerfil">Eliminar</a>|
+                <a asp-action="ExperienciaPerfilUtilizador" asp-route-id="@item.IdPerfil">Experiencias</a>|
+                <a asp-action="ListarSkillTalento" asp-route-id="@item.IdPerfil">Skills</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

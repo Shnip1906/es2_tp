@@ -17,9 +17,7 @@ public partial class Perfil
 
     public bool Publico { get; set; }
 
-    public Guid? IdExperiencia { get; set; }
-
-    public virtual Experiencium? IdExperienciaNavigation { get; set; }
+    public virtual ICollection<Experiencium> Experiencia { get; set; } = new List<Experiencium>();
 
     public virtual ICollection<Skillprof> Skillprofs { get; set; } = new List<Skillprof>();
 }

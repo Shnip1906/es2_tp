@@ -21,6 +21,12 @@ public class PerfilController : Controller
         var myDbContext = _context.Perfils;
         return View(await myDbContext.OrderBy(u => u.NomePerfil).ToListAsync());
     }
+    
+    public async Task<IActionResult> ListarPerfisUtilizador()
+    {
+        var myDbContext = _context.Perfils;
+        return View(await myDbContext.OrderBy(u => u.NomePerfil).ToListAsync());
+    }
 
     public async Task<IActionResult> EliminarPerfil(Guid id)
     {
@@ -48,6 +54,11 @@ public class PerfilController : Controller
     {
         return View();
     }
+    
+    public IActionResult CriarPerfilUtilizador()
+    {
+        return View();
+    }
 
     public IActionResult EditarPerfil(Guid id)
     {
@@ -66,22 +77,44 @@ public class PerfilController : Controller
 
         return View();
     }
-
-    public async Task<IActionResult> EditarPerfis([FromForm] Guid id, [FromForm] string nome, [FromForm] string pais,
-        [FromForm] string email, [FromForm] double precohora)
+    
+    public IActionResult EditarPerfilUtilizador(Guid id)
     {
         var db = new MyDbContext();
+        var u = new Perfil { IdPerfil = id };
+
         var result = db.Perfils.SingleOrDefault(b => b.IdPerfil == id);
         if (result != null)
         {
-            result.NomePerfil = nome;
-            result.Pais = pais;
-            result.Email = email;
-            result.Precohora = precohora;
+            ViewBag.Id = result.IdPerfil;
+            ViewBag.Nome = result.NomePerfil;
+            ViewBag.Pais = result.Pais;
+            ViewBag.Email = result.Email;
+            ViewBag.Preco = result.Precohora;
+            ViewBag.Publico = result.Publico;
         }
 
-        db.SaveChanges();
-        return RedirectToAction("ListarPerfis");
+        return View();
+    }
+
+    public async Task<IActionResult> EditarPerfis([FromForm] Guid Id, [FromForm] string NomePerfil, [FromForm] string Pais,
+        [FromForm] string Email, [FromForm] double Precohora, [FromForm] bool Publico)
+    {
+               
+       var db = new MyDbContext();
+       var result = db.Perfils.SingleOrDefault(p => p.IdPerfil == Id);
+       if (result != null)
+       {
+           result.NomePerfil = NomePerfil;
+           result.Pais = Pais;
+           result.Email = Email;
+           result.Precohora = Precohora;
+           result.Publico = Publico;
+       }
+
+       db.SaveChanges();
+        
+        return RedirectToAction("ListarPerfisUtilizador");
     }
 
     public IActionResult RegistarPerfil([FromForm] string nome, [FromForm] string pais, [FromForm] string email,
@@ -99,6 +132,24 @@ public class PerfilController : Controller
         db.SaveChanges();
         return RedirectToAction("ListarPerfis");
     }
+    
+    public IActionResult RegistarPerfilUtilizador([FromForm] string NomePerfil, [FromForm] string Pais, [FromForm] string Email,
+        [FromForm] double Precohora)
+    {
+        //User user = new User();
+
+        var db = new MyDbContext();
+        Perfil perfil = new Perfil();
+        perfil.NomePerfil = NomePerfil;
+        perfil.Pais = Pais;
+        perfil.Email = Email;
+        perfil.Precohora = Precohora;
+        perfil.Publico = true;
+        
+        db.Perfils.Add(perfil);
+        db.SaveChanges();
+        return RedirectToAction("ListarPerfisUtilizador");
+    }
 
     public async Task<IActionResult> ExperienciaPerfil(Guid id)
     {
@@ -107,13 +158,25 @@ public class PerfilController : Controller
         return View(await myDbContext.Where(u => u.IdExperiencia == id).OrderBy(u => u.IdExperiencia == id).ToListAsync());
     }
 
+    public async Task<IActionResult> ExperienciaPerfilUtilizador(Guid id)
+    {
+        var myDbContext = _context.Experiencia;
+        ViewBag.id = id;
+        return View(await myDbContext.Where(u => u.IdExperiencia == id).OrderBy(u => u.IdExperiencia == id).ToListAsync());
+    }
+    
     // Criar Experiencia Page
     public async Task<IActionResult> CriarExp(Guid id)
     {
         ViewBag.Id = id;
         return View();
     }
-    
+    public async Task<IActionResult> CriarExpUtilizador(Guid id)
+    {
+        ViewBag.Id = id;
+        return View();
+    }
+
     // asp-action form Criar Experiencia
     public async Task<IActionResult> CriarExps(int id,[FromForm] string nomeExp, [FromForm] string Empresa,[FromForm] int AnoInicial, [FromForm] int AnoFinal)
     {
@@ -133,6 +196,26 @@ public class PerfilController : Controller
         return RedirectToAction("ListarPerfis");
     }
     
+    public async Task<IActionResult> CriarExpsUtilizador([FromForm] string NomeExperiencia, [FromForm] string NomeEmpresa,[FromForm] int Anoinicio, [FromForm] int Anofim)
+    {
+        if (Anoinicio > Anofim)
+        {
+            return View("ErroView");
+        }
+        var db = new MyDbContext();
+        Experiencium exp = new Experiencium();
+        //exp.id = id;
+        exp.NomeExperiencia = NomeExperiencia;
+        exp.NomeEmpresa = NomeEmpresa;
+        exp.Anoinicio = Anoinicio;
+        exp.Anofim = Anofim;
+
+        exp.Continuo = Anofim == 2023;
+        db.Experiencia.Add(exp);
+        db.SaveChanges();
+        return RedirectToAction("ListarPerfis");
+    }
+    
     public async Task<IActionResult> EliminarExp(Guid id)
     {
         var db = new MyDbContext();
@@ -143,12 +226,12 @@ public class PerfilController : Controller
         return RedirectToAction("ListarPerfis");
     }
     
-    public async Task<IActionResult> ListarSkillTalento(Guid id)
+    public async Task<IActionResult> ListarSkillTalento(Guid Id)
     {
         {
-            var myDbContext = _context.Skillprofs.Where(t => t.IdPerfil == id).Include(t=>t.IdSkills);
+            var myDbContext = _context.Skillprofs.Where(t => t.IdPerfil == Id).Include(t=>t.IdSkills);
             // ViewBag.id = id;
-            return View(await myDbContext.OrderBy(u =>u.IdPerfil == id).ToListAsync());
+            return View(await myDbContext.OrderBy(u =>u.IdPerfil == Id).ToListAsync());
         }
     }
     

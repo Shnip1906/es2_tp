@@ -9,7 +9,7 @@ public partial class Skill
 
     public string NomeSkills { get; set; } = null!;
 
-    public Guid IdAreaProfissional { get; set; }
+    public Guid? IdAreaProfissional { get; set; }
 
     public virtual Areaprofissional? IdAreaProfissionalNavigation { get; set; }
 
