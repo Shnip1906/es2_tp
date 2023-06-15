@@ -27,6 +27,7 @@
             <strong>Público</strong>
         </th>
         <th></th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -51,7 +52,9 @@
             <td>
                 <a asp-action="EditarPerfil" asp-route-id="@item.IdPerfil">Editar</a>
             </td>
-
+            <td>
+                <a asp-action="ListarAssociacoesSkillTalento" asp-route-id="@item.IdPerfil">Skills</a>
+            </td>
         </tr>
     }
     </tbody>

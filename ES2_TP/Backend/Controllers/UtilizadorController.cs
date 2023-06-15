@@ -431,4 +431,48 @@ public class UtilizadorController : Controller
         db.SaveChanges();
         return RedirectToAction(controllerName:"Utilizador", actionName: "ListarTalentos");
     }
+    public async Task<IActionResult> ListarSkills(int id)
+    {
+        ViewBag.Id = id;
+        var myDbContext = _context.Skills;
+        return View(await myDbContext.OrderBy(u => u.NomeSkills).ToListAsync());
+    }
+
+    public IActionResult CriarSkill()
+    {
+        return View();
+    }
+
+    public IActionResult RegistarSkill([FromForm] string NomeSkills)
+    {
+        var db = new MyDbContext();
+        Skill skill = new Skill();
+        skill.NomeSkills = NomeSkills;
+        skill.IdAreaProfissional = new Guid("58a2aa6a-bb71-4040-8535-53ffcbecd19c");
+        
+        db.Skills.Add(skill);
+        db.SaveChanges();
+        
+        //Areas profissionais necessitam já estar criadas
+        return RedirectToAction("ListarSkills");
+    }
+
+    public  async Task<IActionResult> ElimininarSkill(Guid id)
+    {
+        
+        //Falta implementar a verificação se está encontra associada a algum perfil de talento
+        var db = new MyDbContext();
+        var result = new Skill() { IdSkills = id };
+        db.Skills.Attach(result);
+        db.Skills.Remove(result);
+        await db.SaveChangesAsync();
+        return RedirectToAction("ListarSkills");
+    }
+
+    public async Task<IActionResult> ListarAssociacoesSkillTalento (int id)
+    {
+        ViewBag.Id = id;
+        var myDbContext = _context.Skillprofs;
+        return View(await myDbContext.OrderBy(u => u.Nhoras).ToListAsync());
+    }
 }

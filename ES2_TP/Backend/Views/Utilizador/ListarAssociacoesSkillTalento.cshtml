@@ -1,0 +1,39 @@
+@model IEnumerable<BusinessLogic.Entities.Skillprof>
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout5";
+}
+
+<h1 class="text-center">Lista Skills Associadas ao Perfil</h1>
+<a class="btn btn-primary" asp-area="" asp-controller="Utilizador" asp-action="">Criar Associação</a>
+<table class="table">
+
+    <thead>
+    <tr>
+        <th>
+            <strong>Código da Skill</strong>
+        </th>
+        <th>
+            <strong>Número de Horas</strong>
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdSkills)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nhoras)
+            </td>
+            <td>
+                <a asp-action="" asp-route-id="@item.IdSkillsprof">Eliminar</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
