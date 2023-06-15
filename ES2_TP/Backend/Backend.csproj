@@ -33,7 +33,8 @@
     </ItemGroup>
     
     <ItemGroup>
-      <Compile Remove="Controllers\TalentoController.cs" />
+      <_ContentIncludedByDefault Remove="Pages\Admins\IndexAdmin.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Skills\IndexSkills.cshtml" />
     </ItemGroup>
 
 </Project>

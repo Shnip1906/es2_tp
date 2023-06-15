@@ -21,6 +21,7 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
+        // Caso não tenha dados na tabela Utilizador criar o admin
         var db = new MyDbContext();
         /*var UserDb = db.Utilizadors.FirstOrDefault();
         if (UserDb == null)
@@ -59,36 +60,10 @@ public class HomeController : Controller
         }*/
         return View();
     }
-    
-    /*public IActionResult Registo()
-    {
-        return RedirectToAction(controllerName:"Registo", actionName: "Index");
-    }*/
 
     public IActionResult Privacy()
     {
         return View();
     }
-
-    //Handling errors
-    /*[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-    }
-
-    public IActionResult Registar([FromForm] string nome, [FromForm] string username,[FromForm] string password)
-    {
-        //User user = new User();
-        var db = new MyDbContext();
-        Utilizador user = new Utilizador();
-        user.Username = username;
-        user.Password = password;
-        user.TipoUtilizador = 3;
-        user.NomeUtilizador = nome;
-        db.Utilizadors.Add(user);
-        db.SaveChanges();
-        return RedirectToAction("Index");
-    }*/
 
 }

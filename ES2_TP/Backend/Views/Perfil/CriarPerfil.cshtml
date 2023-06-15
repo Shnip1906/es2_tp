@@ -1,0 +1,37 @@
+﻿@model BusinessLogic.Entities.Perfil
+
+@{
+    ViewBag.Title = "Index"; 
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<h2 class="text-center">Criar talento</h2>
+
+<form asp-action="RegistarPerfil">
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="NomePerfil" class="control-label"></label>
+        <input asp-for="NomePerfil" type="text" class="form-control"/>
+        <span asp-validation-for="NomePerfil" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Pais" class="control-label"></label>
+        <input asp-for="Pais" type="text" class="form-control"/>
+        <span asp-validation-for="Pais" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email" class="control-label"></label>
+        <input asp-for="Email" type="text" class="form-control"/>
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Precohora" class="control-label"></label>
+        <input asp-for="Precohora" type="double" class="form-control"/>
+        <span asp-validation-for="Precohora" class="text-danger"></span>
+    </div>
+    <br/>
+    <div class="form-group">
+        <input type="submit" value="RegistarTalento" class="btn btn-primary"/>
+    </div>
+</form>
