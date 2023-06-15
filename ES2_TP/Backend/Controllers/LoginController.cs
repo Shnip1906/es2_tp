@@ -28,7 +28,7 @@ public class LoginController : Controller
             {
                 // ADMIN
                 user = u;
-                return View(users);
+                return RedirectToAction(controllerName:"Admins", actionName: "IndexAdmin");
             }
             if ((username.Equals(u.Username)) && password.Equals(u.Password) && u.TipoUtilizador == 2)
             {

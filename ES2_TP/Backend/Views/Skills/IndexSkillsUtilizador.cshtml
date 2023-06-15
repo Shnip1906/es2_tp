@@ -1,0 +1,42 @@
+@using Microsoft.AspNetCore.Http
+@model IEnumerable<BusinessLogic.Entities.Skill>
+@{
+    ViewBag.Title = "Skills";
+    Layout = "~/Views/Shared/_Layout5.cshtml";
+}
+<div>  
+    <h2 class="text-center">Lista das Skills</h2>
+    <a class="btn btn-primary" asp-area="" asp-action="CreateUtilizador">Criar nova Skill</a>
+</div>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            Skills
+        </th>
+        <th>
+            Àrea Profissional
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomeSkills)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdAreaProfissionalNavigation!.NomeAreaPrfossional)
+            </td>
+
+            <td>
+                <a asp-action="EditUtilizador" asp-route-id="@item.IdSkills">Editar</a> |
+                <a asp-action="EliminarUtilizador" asp-route-id="@item.IdSkills">Eliminar</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

@@ -24,6 +24,12 @@ public class SkillsController : Controller
         return View(await myDbContext.OrderBy(u => u.NomeSkills).ToListAsync());
     }
     
+    public async  Task<IActionResult> IndexSkillsUtilizador()
+    {
+        var myDbContext = _context.Skills.Include(u=>u.IdAreaProfissionalNavigation);
+        return View(await myDbContext.OrderBy(u => u.NomeSkills).ToListAsync());
+    }
+    
     public IActionResult Edit(Guid id)
     {
         var db = new MyDbContext();
@@ -35,19 +41,39 @@ public class SkillsController : Controller
         return View();
     }
     
-    public async Task<IActionResult> Edits ([FromForm] Guid id,[FromForm] string nome, [FromForm] int fk_idareaProf, [FromForm] int FkIdareaProfNavigation, [FromForm] string NomeArea)
+    public IActionResult EditUtilizador(Guid id)
+    {
+        var db = new MyDbContext();
+        var result = db.Skills.SingleOrDefault(s => s.IdSkills == id);
+        ViewBag.Id = result.IdSkills;
+        ViewBag.Nome = result.NomeSkills;
+       
+        return View();
+    }
+    
+    public async Task<IActionResult> Edits ([FromForm] Guid id,[FromForm] string NomeSkills, [FromForm] int fk_idareaProf, [FromForm] int FkIdareaProfNavigation, [FromForm] string NomeArea)
     {
         var db = new MyDbContext();
         var result = db.Skills.SingleOrDefault(s => s.IdSkills == id);
         //ViewBag.teste = result.Nome;
         //return View("teste");
-        result.NomeSkills = nome;
+        result.NomeSkills = NomeSkills;
        // result.FkIdareaProfNavigation.Nome = NomeArea ;
       
         db.SaveChanges();
         return RedirectToAction("IndexSkills");
     }
 
+    public async Task<IActionResult> EditsUtilizador ([FromForm] Guid id,[FromForm] string NomeSkills)
+    {
+        var db = new MyDbContext();
+        var result = db.Skills.SingleOrDefault(s => s.IdSkills == id);
+        result.NomeSkills = NomeSkills;
+      
+        db.SaveChanges();
+        return RedirectToAction("IndexSkillsUtilizador");
+    }
+    
     public IActionResult Create()
     
     {
@@ -58,13 +84,29 @@ public class SkillsController : Controller
             item.Add(new SelectListItem(text: areaProfissional.NomeAreaPrfossional, value:areaProfissional.IdAreaProfissional.ToString()));
         }
 
-        ViewData["IdProf"] = new SelectList(_context.Areaprofissionals, "IdProf", "Nome");
+        ViewData["IdProf"] = new SelectList(_context.Areaprofissionals, "IdAreaProfissional", "NomeAreaPrfossional");
 
         return View();
 
     }
 
-    public IActionResult Registar([FromForm] string nome, [FromForm] Guid fkIdareaProf)
+    public IActionResult CreateUtilizador()
+    
+    {
+        var item = new List<SelectListItem>();
+
+        foreach ( Areaprofissional areaProfissional in _context.Areaprofissionals )
+        {
+            item.Add(new SelectListItem(text: areaProfissional.NomeAreaPrfossional, value:areaProfissional.IdAreaProfissional.ToString()));
+        }
+
+        ViewData["IdProf"] = new SelectList(_context.Areaprofissionals, "IdAreaProfissional", "NomeAreaPrfossional");
+
+        return View();
+
+    }
+    
+   /* public IActionResult Registar([FromForm] string nome, [FromForm] Guid fkIdareaProf)
     {
       
         var db = new MyDbContext();
@@ -78,8 +120,37 @@ public class SkillsController : Controller
         return RedirectToAction("IndexSkills");
        
         
+    }*/
+    
+    public IActionResult Registar([FromForm] string NomeSkills, [FromForm] Guid IdAreaProfissional)
+    {
+        var db = new MyDbContext();
+        Skill skill = new Skill();
+        skill.NomeSkills = NomeSkills;
+        skill.IdAreaProfissional = IdAreaProfissional;
+        
+        db.Skills.Add(skill);
+        db.SaveChanges();
+        
+        //Areas profissionais necessitam já estar criadas
+        return RedirectToAction("IndexSkills");
     }
-    public async Task<IActionResult> Eliminar(Guid id)
+    
+    public IActionResult RegistarUtilizador([FromForm] string NomeSkills, [FromForm] Guid IdAreaProfissional)
+    {
+        var db = new MyDbContext();
+        Skill skill = new Skill();
+        skill.NomeSkills = NomeSkills;
+        skill.IdAreaProfissional = IdAreaProfissional;
+        
+        db.Skills.Add(skill);
+        db.SaveChanges();
+        
+        //Areas profissionais necessitam já estar criadas
+        return RedirectToAction("IndexSkillsUtilizador");
+    }
+
+    /*public async Task<IActionResult> Eliminar(Guid id)
     {
         var db = new MyDbContext();
         var db2 = new MyDbContext();
@@ -94,7 +165,29 @@ public class SkillsController : Controller
         db.Skills.Remove(result);
         db.SaveChanges();
         return RedirectToAction("IndexSkills");
+    }*/
+    public  async Task<IActionResult> Eliminar(Guid id)
+    {
+        //Falta implementar a verificação se está encontra associada a algum perfil de talento
+        var db = new MyDbContext();
+        var result = new Skill() { IdSkills = id };
+        db.Skills.Attach(result);
+        db.Skills.Remove(result);
+        await db.SaveChangesAsync();
+        return RedirectToAction("IndexSkills");
     }
+
+    public  async Task<IActionResult> EliminarUtilizador(Guid id)
+    {
+        //Falta implementar a verificação se está encontra associada a algum perfil de talento
+        var db = new MyDbContext();
+        var result = new Skill() { IdSkills = id };
+        db.Skills.Attach(result);
+        db.Skills.Remove(result);
+        await db.SaveChangesAsync();
+        return RedirectToAction("IndexSkillsUtilizador");
+    }
+    
    
     public async  Task<IActionResult> IndexSkillsManager()
     {

@@ -17,5 +17,7 @@ public partial class Experiencium
 
     public bool? Continuo { get; set; }
 
-    public virtual ICollection<Perfil> Perfils { get; set; } = new List<Perfil>();
+    public Guid? IdPerfil { get; set; }
+
+    public virtual Perfil? IdPerfilNavigation { get; set; }
 }

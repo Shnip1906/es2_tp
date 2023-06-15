@@ -23,7 +23,7 @@ public class HomeController : Controller
     {
         // Caso não tenha dados na tabela Utilizador criar o admin
         var db = new MyDbContext();
-        /*var UserDb = db.Utilizadors.FirstOrDefault();
+        var UserDb = db.Utilizadors.FirstOrDefault();
         if (UserDb == null)
         {
             Utilizador user = new Utilizador();
@@ -33,31 +33,28 @@ public class HomeController : Controller
             user.Password = "admin";
             db.Utilizadors.Add(user);
             db.SaveChanges();
-        }*/
+        }
 
-       /* var isthere2 = db.AreaProfissionals.FirstOrDefault();
+        var isthere2 = db.Areaprofissionals.FirstOrDefault();
         if (isthere2 == null)
         {
-            AreaProfissional pro = new AreaProfissional();
-            AreaProfissional pro2 = new AreaProfissional();
-            AreaProfissional pro3 = new AreaProfissional();
-            AreaProfissional pro4 = new AreaProfissional();
-            pro.Nome = "developers";
-            db.AreaProfissionals.Add(pro);
+            Areaprofissional pro = new Areaprofissional();
+            Areaprofissional pro2 = new Areaprofissional();
+            Areaprofissional pro3 = new Areaprofissional();
+            Areaprofissional pro4 = new Areaprofissional();
+            
+            pro.NomeAreaPrfossional = "developers";
+            pro2.NomeAreaPrfossional = "designers";
+            pro3.NomeAreaPrfossional = "product managers";
+            pro4.NomeAreaPrfossional = "project managers";
+            
+            db.Areaprofissionals.Add(pro);
+            db.Areaprofissionals.Add(pro2);
+            db.Areaprofissionals.Add(pro3);
+            db.Areaprofissionals.Add(pro4);
+            
             db.SaveChanges();
-            
-            pro2.Nome = "designers";
-            db2.AreaProfissionals.Add(pro2);
-            db2.SaveChanges();
-            
-            pro3.Nome = "product managers";
-            db3.AreaProfissionals.Add(pro3);
-            db3.SaveChanges();
-            
-            pro4.Nome = "project managers";
-            db4.AreaProfissionals.Add(pro4);
-            db4.SaveChanges();
-        }*/
+        }
         return View();
     }
 
