@@ -1,0 +1,35 @@
+@model BusinessLogic.Entities.Skillprof
+@{
+    ViewBag.Title = "Index"; 
+    Layout = "~/Views/Shared/_Layout5.cshtml";
+}
+
+<h2 class="text-center">Adicionar Skill a Associação</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CriaSKTUtilizador">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Nhoras" class="control-label"></label>
+                <input type="number" asp-for="Nhoras" class="form-control"/>
+                <span asp-validation-for="Nhoras" class="text-danger"></span>
+            </div>
+            <br/>
+            <div class="form-group">
+                <label>Escolhe uma skill: </label>   
+                <select asp-for="IdSkills" asp-items="ViewBag.IdSkills"></select>
+            </div>
+            <br/>
+            <div class="form-group">
+                <label>Escolher um Perfil: </label>   
+                <select asp-for="IdPerfil" asp-items="ViewBag.IdPerfil"></select>
+            </div>
+            <br/>
+            <div class="form-group">
+                <input type="submit" value="CriarSkillPerfil" class="btn btn-primary"/>
+            </div>
+        </form>
+    </div>
+</div>

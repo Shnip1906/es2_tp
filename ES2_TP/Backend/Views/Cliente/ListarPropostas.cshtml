@@ -1,0 +1,41 @@
+@model IEnumerable<BusinessLogic.Entities.Proposta>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout5.cshtml";
+}
+
+<h2 class="text-center"> Lista das propostas</h2>
+<p><a class="btn btn-primary" asp-action="AdicionarProp" asp-route-id="@ViewBag.Id">Adicionar Proposta</a></p>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NomePropostas)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ntotalhoras)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomePropostas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ntotalhoras)
+            </td>
+            <td>
+                <a asp-action="EliminarProposta" asp-route-id="@item.IdPropostas">Eliminar</a> |
+                <a asp-action="ListarSkills" asp-route-id="@item.IdPropostas">Skills</a> | 
+                <a asp-action="ListaPerfis" asp-route-id="@item.IdPropostas">Perfis</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

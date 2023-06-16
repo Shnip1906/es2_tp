@@ -1,0 +1,47 @@
+@using Microsoft.AspNetCore.Http
+@model IEnumerable<BusinessLogic.Entities.Skillprof>
+@{
+    ViewBag.Title = "Skills";
+    Layout = "~/Views/Shared/_Layout5.cshtml";
+}
+
+<h2 class="text-center">Lista de Perfis Adequados</h2>
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            Nome
+        </th>
+        <th>
+            País
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            PreçoHora
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    
+    @foreach (var item in Model)
+    {
+
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdPerfilNavigation.NomePerfil)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdPerfilNavigation.Pais)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdPerfilNavigation.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdPerfilNavigation.Precohora)
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

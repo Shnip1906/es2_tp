@@ -36,5 +36,9 @@
       <_ContentIncludedByDefault Remove="Pages\Admins\IndexAdmin.cshtml" />
       <_ContentIncludedByDefault Remove="Pages\Skills\IndexSkills.cshtml" />
     </ItemGroup>
+    
+    <ItemGroup>
+      <Content Remove="Views\Cliente\UserJaExiste.cshtml" />
+    </ItemGroup>
 
 </Project>
