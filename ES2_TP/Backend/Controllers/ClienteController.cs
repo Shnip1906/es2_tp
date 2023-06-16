@@ -205,4 +205,41 @@ public class ClienteController : Controller
         db.SaveChanges();
         return RedirectToAction("ListarSkills", new RouteValueDictionary{{"id", sk.IdPropostas}});
     }
+    
+    public async Task<IActionResult> ListaPerfis(Guid id)
+    {
+        var db = new MyDbContext();
+        //var teste = db.Proposta.Where(p => p.IdProposta == id).SingleOrDefault();
+        var propskills = db.Skillsproposta.Where(p => p.IdPropostas == id).ToList();
+        var perfis = db.Skillprofs;
+        List<Skillprof> talents = new List<Skillprof>();
+        List<Skillprof> repetidos = new List<Skillprof>();
+        
+        foreach (var props in propskills)
+        {
+            var idprop = props.IdSkills.GetValueOrDefault();
+            var tal = perfis.Where(p => p.IdSkills == idprop).Include(p => p.IdPerfilNavigation).ToList();
+            foreach (var t in tal)
+            {
+                bool repete = false;
+                foreach (var x in repetidos)
+                {
+                    if (x.IdPerfil == t.IdPerfil)
+                    {
+                        repete = true;
+                    }  
+                }
+
+                if (!repete)
+                {
+                    talents.Add(t);
+                    repetidos.Add(t);
+                }
+            }
+        }
+        
+        //ViewBag.teste = talentos;
+        //return View("teste");
+        return View("ListPerfilSkill",talents);
+    }
 }

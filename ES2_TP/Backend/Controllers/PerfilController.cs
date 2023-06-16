@@ -36,13 +36,7 @@ public class PerfilController : Controller
         var db4 = new MyDbContext();
         db2.Skillprofs.RemoveRange(db2.Skillprofs.Where(u => u.IdSkills == id));
         db2.SaveChanges();
-        
-        /*db3.TalentClientes.RemoveRange(db3.TalentClientes.Where(u => u.IdTalento == id));
-        db3.SaveChanges();
-        
-        db4.Historicos.RemoveRange(db4.Historicos.Where(u => u.IdTalento == id));
-        db4.SaveChanges();*/
-        
+
         var result = new Perfil { IdPerfil = id };
         db.Perfils.Attach(result);
         db.Perfils.Remove(result);
@@ -248,8 +242,7 @@ public class PerfilController : Controller
     public async Task<IActionResult> ListarSkillPerfilUtilizador(Guid Id)
     {
         {
-            var myDbContext = _context.Skillprofs.Where(t => t.IdPerfil == Id);
-            // ViewBag.id = id;
+            var myDbContext = _context.Skillprofs.Where(t => t.IdPerfil == Id).Include(p => p.IdSkillsNavigation);
             return View(await myDbContext.OrderBy(u =>u.IdPerfil == Id).ToListAsync());
         }
     }
