@@ -1,0 +1,42 @@
+@model BusinessLogic.Entities.Proposta
+
+@{
+    ViewBag.Title = "Registo";
+    Layout = "_Layout5";
+}
+
+<h2>Adicionar Proposta</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="RegistarProposta">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NomePropostas" class="control-label"></label>
+                <input asp-for="NomePropostas" class="form-control"/>
+                <span asp-validation-for="NomePropostas" class="text-danger"></span>
+            </div>
+      
+            <br/>
+            <div class="form-group">
+                <label>Escolha uma área profissional: </label>   
+                <select asp-for="IdAreaProfissional" asp-items="ViewBag.IdAreaProfissional"></select>
+            </div>
+            <br/>
+            <div class="form-group">
+                <label asp-for="Ntotalhoras" class="control-label"></label>
+                <input asp-for="Ntotalhoras" class="form-control"/>
+                <span asp-validation-for="Ntotalhoras" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Descricao" class="control-label"></label>
+                <textarea asp-for="Descricao" class="form-control"></textarea>
+            </div>
+            <input id="Id" name="Id" type="hidden" value="@ViewBag.Id" />
+            <br/>
+            <div class="form-group">
+                <input type="submit" value="CreateProp" class="btn btn-primary"/>
+            </div>
+        </form>
+    </div>
+</div>

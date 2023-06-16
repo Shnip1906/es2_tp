@@ -18,6 +18,8 @@ public partial class MyDbContext : DbContext
 
     public virtual DbSet<Areaprofissional> Areaprofissionals { get; set; }
 
+    public virtual DbSet<Cliente> Clientes { get; set; }
+
     public virtual DbSet<Experiencium> Experiencia { get; set; }
 
     public virtual DbSet<Perfil> Perfils { get; set; }
@@ -34,7 +36,7 @@ public partial class MyDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseNpgsql("Host=localhost;Database=es2;Username=es2;Password=es2;Port=59007");
+        => optionsBuilder.UseNpgsql("Host=localhost;Database=es2;Username=es2;Password=es2;Port=51355");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -55,6 +57,27 @@ public partial class MyDbContext : DbContext
             entity.Property(e => e.NomeAreaPrfossional)
                 .HasMaxLength(100)
                 .HasColumnName("nome_area_prfossional");
+        });
+
+        modelBuilder.Entity<Cliente>(entity =>
+        {
+            entity.HasKey(e => e.IdCliente).HasName("idcliente_pk");
+
+            entity.ToTable("cliente");
+
+            entity.Property(e => e.IdCliente)
+                .HasDefaultValueSql("uuid_generate_v4()")
+                .HasColumnName("id_cliente");
+            entity.Property(e => e.IdUtilizador).HasColumnName("id_utilizador");
+            entity.Property(e => e.IdUtilizadorCliente).HasColumnName("id_utilizador_cliente");
+
+            entity.HasOne(d => d.IdUtilizadorNavigation).WithMany(p => p.ClienteIdUtilizadorNavigations)
+                .HasForeignKey(d => d.IdUtilizador)
+                .HasConstraintName("cliente_id_utilizador_fkey");
+
+            entity.HasOne(d => d.IdUtilizadorClienteNavigation).WithMany(p => p.ClienteIdUtilizadorClienteNavigations)
+                .HasForeignKey(d => d.IdUtilizadorCliente)
+                .HasConstraintName("cliente_id_utilizador_cliente_fkey");
         });
 
         modelBuilder.Entity<Experiencium>(entity =>
@@ -121,6 +144,8 @@ public partial class MyDbContext : DbContext
                 .HasMaxLength(1000)
                 .HasColumnName("descricao");
             entity.Property(e => e.IdAreaProfissional).HasColumnName("id_area_profissional");
+            entity.Property(e => e.IdCliente).HasColumnName("id_cliente");
+            entity.Property(e => e.IdUtilizador).HasColumnName("id_utilizador");
             entity.Property(e => e.NomePropostas)
                 .HasMaxLength(100)
                 .HasColumnName("nome_propostas");
@@ -129,6 +154,14 @@ public partial class MyDbContext : DbContext
             entity.HasOne(d => d.IdAreaProfissionalNavigation).WithMany(p => p.Proposta)
                 .HasForeignKey(d => d.IdAreaProfissional)
                 .HasConstraintName("propostas_id_area_profissional_fkey");
+
+            entity.HasOne(d => d.IdClienteNavigation).WithMany(p => p.PropostaIdClienteNavigations)
+                .HasForeignKey(d => d.IdCliente)
+                .HasConstraintName("propostas_id_cliente_fkey");
+
+            entity.HasOne(d => d.IdUtilizadorNavigation).WithMany(p => p.PropostaIdUtilizadorNavigations)
+                .HasForeignKey(d => d.IdUtilizador)
+                .HasConstraintName("propostas_id_utilizador_fkey");
         });
 
         modelBuilder.Entity<Skill>(entity =>

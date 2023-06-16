@@ -15,7 +15,15 @@ public partial class Proposta
 
     public Guid? IdAreaProfissional { get; set; }
 
+    public Guid? IdCliente { get; set; }
+
+    public Guid? IdUtilizador { get; set; }
+
     public virtual Areaprofissional? IdAreaProfissionalNavigation { get; set; }
+
+    public virtual Utilizador? IdClienteNavigation { get; set; }
+
+    public virtual Utilizador? IdUtilizadorNavigation { get; set; }
 
     public virtual ICollection<Skillspropostum> Skillsproposta { get; set; } = new List<Skillspropostum>();
 }

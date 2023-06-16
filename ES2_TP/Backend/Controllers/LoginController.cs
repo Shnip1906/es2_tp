@@ -41,6 +41,7 @@ public class LoginController : Controller
                 //ViewBag.id = u.IdUtilizador; 
                 user = u;
                 // USER
+                SharedVariables.SharedVariables.userID = u.IdUtilizador;
                 return RedirectToAction("IndexUser",  "Utilizador", new {@id=u.IdUtilizador});
             }
             /*if ((username.Equals(u.Username)) && password.Equals(u.Password) && u.Tipo == 4)

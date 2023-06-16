@@ -162,7 +162,7 @@ public class PerfilController : Controller
     {
         var myDbContext = _context.Experiencia;
         ViewBag.id = id;
-        return View(await myDbContext.Where(u => u.IdExperiencia == id).OrderBy(u => u.IdExperiencia == id).ToListAsync());
+        return View(await myDbContext.Where(u => u.IdPerfil == id).ToListAsync());
     }
     
     // Criar Experiencia Page
@@ -196,7 +196,7 @@ public class PerfilController : Controller
         return RedirectToAction("ListarPerfis");
     }
     
-    public async Task<IActionResult> CriarExpsUtilizador([FromForm] string NomeExperiencia, [FromForm] string NomeEmpresa,[FromForm] int Anoinicio, [FromForm] int Anofim)
+    public async Task<IActionResult> CriarExpsUtilizador([FromForm] string NomeExperiencia, [FromForm] string NomeEmpresa,[FromForm] int Anoinicio, [FromForm] int Anofim, [FromForm] Guid Id)
     {
         if (Anoinicio > Anofim)
         {
@@ -209,11 +209,11 @@ public class PerfilController : Controller
         exp.NomeEmpresa = NomeEmpresa;
         exp.Anoinicio = Anoinicio;
         exp.Anofim = Anofim;
-
+        exp.IdPerfil = Id;
         exp.Continuo = Anofim == 2023;
         db.Experiencia.Add(exp);
         db.SaveChanges();
-        return RedirectToAction("ListarPerfis");
+        return RedirectToAction("ExperienciaPerfilUtilizador", new RouteValueDictionary { { "id", Id } });
     }
     
     public async Task<IActionResult> EliminarExp(Guid id)
@@ -226,10 +226,29 @@ public class PerfilController : Controller
         return RedirectToAction("ListarPerfis");
     }
     
+    public async Task<IActionResult> EliminarExpUtilizador(Guid id)
+    {
+        var db = new MyDbContext();
+        var result = new Experiencium() { IdExperiencia = id };
+        db.Experiencia.Attach(result);
+        db.Experiencia.Remove(result);
+        db.SaveChanges();
+        return RedirectToAction("ListarPerfisUtilizador");
+    }
+    
     public async Task<IActionResult> ListarSkillTalento(Guid Id)
     {
         {
             var myDbContext = _context.Skillprofs.Where(t => t.IdPerfil == Id).Include(t=>t.IdSkills);
+            // ViewBag.id = id;
+            return View(await myDbContext.OrderBy(u =>u.IdPerfil == Id).ToListAsync());
+        }
+    }
+    
+    public async Task<IActionResult> ListarSkillPerfilUtilizador(Guid Id)
+    {
+        {
+            var myDbContext = _context.Skillprofs.Where(t => t.IdPerfil == Id);
             // ViewBag.id = id;
             return View(await myDbContext.OrderBy(u =>u.IdPerfil == Id).ToListAsync());
         }
@@ -258,6 +277,29 @@ public class PerfilController : Controller
         return View();
     }
     
+    public IActionResult CriarSkillPerfilUtilizador()
+    {
+        var item = new List<SelectListItem>();
+
+        foreach ( Skill skil in _context.Skills )
+        {
+            item.Add(new SelectListItem(text: skil.NomeSkills, value:skil.IdSkills.ToString()));
+        }
+
+        ViewData["IdSkills"] = new SelectList(_context.Skills, "IdSkills", "NomeSkills");
+        
+        var item2 = new List<SelectListItem>();
+
+        foreach ( Perfil p in _context.Perfils )
+        {
+            item2.Add(new SelectListItem(text: p.NomePerfil, value:p.IdPerfil.ToString()));
+        }
+
+        ViewData["IdPerfil"] = new SelectList(_context.Perfils, "IdPerfil", "NomePerfil");
+        
+        return View();
+    }
+    
     public IActionResult CriaSKT([FromForm] int Anos, [FromForm] Guid fkIdSkill,[FromForm] Guid fkIdTalento)
     {
 
@@ -271,6 +313,26 @@ public class PerfilController : Controller
         db.SaveChanges();
 
         return RedirectToAction("ListarPerfis");
+    }
+    
+    public IActionResult CriaSKTUtilizador([FromForm] int Nhoras, [FromForm] Guid IdSkills,[FromForm] Guid IdPerfil)
+    {
+
+        Console.WriteLine(Nhoras);
+        Console.WriteLine(IdPerfil);
+        Console.WriteLine(IdSkills);
+        var db = new MyDbContext();
+        
+        Skillprof skillprof = new Skillprof();
+        
+        skillprof.Nhoras = Nhoras;
+        skillprof.IdSkills= IdSkills;
+        skillprof.IdPerfil = IdPerfil;
+        
+        db.Skillprofs.Add(skillprof);
+        db.SaveChanges();
+
+        return RedirectToAction("ListarSkillPerfilUtilizador", new RouteValueDictionary { { "id", IdPerfil } });
     }
     public async Task<IActionResult> ListarPerfil2(string id, string searchTalento)
     {
@@ -347,5 +409,15 @@ public class PerfilController : Controller
         db.Skillprofs.Add(tSkillprof);
         db.SaveChanges();
         return RedirectToAction("ListarPerfil2");
+    }
+
+    public IActionResult EliminarSkillAssoc(Guid id)
+    {
+        var db = new MyDbContext();
+        var result = new Skillprof() { IdSkillsprof = id };
+        db.Skillprofs.Attach(result);
+        db.Skillprofs.Remove(result);
+        db.SaveChanges();
+        return RedirectToAction("ListarPerfisUtilizador");
     }
 }
