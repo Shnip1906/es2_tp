@@ -328,6 +328,8 @@ public class PerfilController : Controller
         return RedirectToAction("ListarSkillPerfilUtilizador", new RouteValueDictionary { { "id", IdPerfil } });
     }
     public async Task<IActionResult> ListarPerfil2(string id, string searchTalento)
+
+    public async Task<IActionResult> ListarPerfilUserManager(Guid id, string searchTalento)
     {
         var myDbContext = _context.Perfils;
         return View(await myDbContext.OrderBy(u => u.NomePerfil).ToListAsync());
@@ -359,7 +361,7 @@ public class PerfilController : Controller
         perfil.Precohora = precohora;
         db.Perfils.Add(perfil);
         db.SaveChanges();
-        return RedirectToAction("ListarPerfil2");
+        return RedirectToAction("ListarPerfilUserManager");
     }
 
     public IActionResult CriarPerfilUm()
@@ -401,7 +403,7 @@ public class PerfilController : Controller
         tSkillprof.IdPerfil = fkIdTalento;
         db.Skillprofs.Add(tSkillprof);
         db.SaveChanges();
-        return RedirectToAction("ListarPerfil2");
+        return RedirectToAction("ListarPerfilUserManager");
     }
 
     public IActionResult EliminarSkillAssoc(Guid id)
