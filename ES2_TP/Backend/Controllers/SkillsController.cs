@@ -209,14 +209,14 @@ public class SkillsController : Controller
         
     }
 
-    public IActionResult RegistarUM([FromForm] string nome, [FromForm] Guid fkIdareaProf)
+    public IActionResult RegistarUM([FromForm] string NomeSkills, [FromForm] Guid IdAreaProfissional)
     {
       
         var db = new MyDbContext();
 
         Skill skill = new Skill();
-        skill.NomeSkills = nome;
-        skill.IdAreaProfissional = fkIdareaProf;
+        skill.NomeSkills = NomeSkills;
+        skill.IdAreaProfissional = IdAreaProfissional;
         db.Skills.Add(skill);
         db.SaveChanges();
         return RedirectToAction("IndexSkillsManager");

@@ -22,11 +22,17 @@ public class RelatorioUserManagerController : Controller
     {
         return View();
     }
-    public async  Task<IActionResult> RelSkill([FromForm] string nome)
+    
+    public IActionResult RelSkill()
+    {
+        return View("RelatorioUserManagerSkill");
+    }
+    
+    public async  Task<IActionResult> RelS([FromForm] string NomeSkills)
     {
         var value = 0.0;
         var count = 0;
-        var ski = _context.Skills.Where(p => p.NomeSkills == nome).SingleOrDefault();
+        var ski = _context.Skills.Where(p => p.NomeSkills == NomeSkills).SingleOrDefault();
         
         var talent = _context.Skillprofs.Where(p => p.IdSkills == ski.IdSkills).Include(p => p.IdPerfilNavigation).ToList();
         foreach (var tal in talent)
@@ -38,19 +44,19 @@ public class RelatorioUserManagerController : Controller
         var media = value / count;
         var final = media * 176;
         ViewBag.final = final;
-        return View("RelatorioUserManagerSkill");
-        //return View();
+        //return View("RelatorioUserManagerSkill");
+        return View();
     }
     public async  Task<IActionResult> RelPerfilPais()
     {
         return View();
     }
-    public async  Task<IActionResult> RelPerfil([FromForm] string pais)
+    public async  Task<IActionResult> RelPerfil([FromForm] string Pais)
     {
         
         var value = 0.0;
         var count = 0;
-        var talento = _context.Perfils.Where(p => p.Pais == pais).ToList();
+        var talento = _context.Perfils.Where(p => p.Pais == Pais).ToList();
         foreach (var tal in talento)
         {
             count = count + 1;

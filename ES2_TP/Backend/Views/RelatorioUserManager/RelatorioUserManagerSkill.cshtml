@@ -1,9 +1,24 @@
-﻿@model IEnumerable<BusinessLogic.Entities.Utilizador>
-
+﻿@model BusinessLogic.Entities.Skill
 @{
-    ViewBag.Title = "Relatório - Preço Médio";
+    ViewBag.Title = "Relatório";
     Layout = "_Layout4";
 }
+<h2 class="text-center"> Relatório por skill</h2>
 
-Preço Médio por mês: @ViewBag.final$
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="RelS">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NomeSkills" class="control-label"></label>
+                <input asp-for="NomeSkills" class="form-control"/>
+                <span asp-validation-for="NomeSkills" class="text-danger"></span>
+            </div>
+            <br/>
+            <div class="form-group">
+                <input type="submit" value="Criar" class="btn btn-primary"/>
+            </div>
+        </form>
+    </div>
+</div>
 
