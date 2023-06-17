@@ -110,18 +110,38 @@ public class PerfilController : Controller
         
         return RedirectToAction("ListarPerfisUtilizador");
     }
+    
+    public async Task<IActionResult> EditarPerfisAdmin([FromForm] Guid Id, [FromForm] string NomePerfil, [FromForm] string Pais,
+        [FromForm] string Email, [FromForm] double Precohora, [FromForm] bool Publico)
+    {
+               
+        var db = new MyDbContext();
+        var result = db.Perfils.SingleOrDefault(p => p.IdPerfil == Id);
+        if (result != null)
+        {
+            result.NomePerfil = NomePerfil;
+            result.Pais = Pais;
+            result.Email = Email;
+            result.Precohora = Precohora;
+            result.Publico = Publico;
+        }
 
-    public IActionResult RegistarPerfil([FromForm] string nome, [FromForm] string pais, [FromForm] string email,
-        [FromForm] double precohora)
+        db.SaveChanges();
+        
+        return RedirectToAction("ListarPerfis");
+    }
+
+    public IActionResult RegistarPerfil([FromForm] string NomePerfil, [FromForm] string Pais, [FromForm] string Email,
+        [FromForm] double Precohora)
     {
         //User user = new User();
 
         var db = new MyDbContext();
         Perfil perfil = new Perfil();
-        perfil.NomePerfil = nome;
-        perfil.Email = email;
-        perfil.Pais = pais;
-        perfil.Precohora = precohora;
+        perfil.NomePerfil = NomePerfil;
+        perfil.Email = Email;
+        perfil.Pais = Pais;
+        perfil.Precohora = Precohora;
         db.Perfils.Add(perfil);
         db.SaveChanges();
         return RedirectToAction("ListarPerfis");
