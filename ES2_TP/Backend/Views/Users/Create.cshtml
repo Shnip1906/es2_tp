@@ -27,12 +27,14 @@
             </div>
             <br/>
             
-              <text> Escolha umas das opções para o tipo de utilizador: 2 - UserManager e 3 - Utilizador </text>
-            <br/>
             <div class="form-group">
                 <label asp-for="TipoUtilizador" class="control-label"></label>
-                <input asp-for="TipoUtilizador" class="form-control"/>
-                <span asp-validation-for="TipoUtilizador" class="text-danger"></span>
+                <select asp-for="TipoUtilizador" name="TipoUtilizador" id="TipoUtilizador" class="control-label">
+                  <option value="1">Admin</option>
+                  <option value="2">User Manager</option>
+                  <option value="3">Utilizador</option>
+                  <option value="4">Cliente</option>
+                </select>
             </div>
           
             <br/>

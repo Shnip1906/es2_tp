@@ -20,12 +20,12 @@ public class UsersController : Controller
     {
         return View();
     }
-    public IActionResult Registar([FromForm] string nome, [FromForm] string username,[FromForm] string password, [FromForm] int Tipo)
+    public IActionResult Registar([FromForm] string NomeUtilizador, [FromForm] string Username,[FromForm] string Password, [FromForm] int TipoUtilizador)
     {
         //User user = new User();
         
         var db2 = new MyDbContext();
-        var exist = db2.Utilizadors.Where(p => p.Username == username).FirstOrDefault();
+        var exist = db2.Utilizadors.Where(p => p.Username == Username).FirstOrDefault();
         if (exist != null)
         {
             ViewBag.teste = "O username já existe no sistema!!!";
@@ -34,10 +34,10 @@ public class UsersController : Controller
         
         var db = new MyDbContext();
         Utilizador users = new Utilizador();
-        users.Username = username;
-        users.Password = password;
-        users.TipoUtilizador = Tipo;
-        users.NomeUtilizador = nome;
+        users.NomeUtilizador = NomeUtilizador;
+        users.Username = Username;
+        users.Password = Password;
+        users.TipoUtilizador = TipoUtilizador;
         db.Utilizadors.Add(users);
         db.SaveChanges();
         return RedirectToAction("Index");
@@ -64,52 +64,50 @@ public class UsersController : Controller
         
         return View();
     }
-    public async Task<IActionResult> Edits([FromForm] Guid id,[FromForm] string nome, [FromForm] string username,[FromForm] string password)
+    public async Task<IActionResult> Edits([FromForm] Guid Id,[FromForm] string NomeUtilizador, [FromForm] string Username,[FromForm] string Password)
     {
         var db = new MyDbContext();
-        var result = db.Utilizadors.SingleOrDefault(b => b.IdUtilizador == id);
+        var result = db.Utilizadors.SingleOrDefault(b => b.IdUtilizador == Id);
         //ViewBag.teste = result.Nome;
         //return View("teste");
-        result.NomeUtilizador = nome;
-        result.Username = username;
-        result.Password = password;
+        result.NomeUtilizador = NomeUtilizador;
+        result.Username = Username;
+        result.Password = Password;
         db.SaveChanges();
         return RedirectToAction("Index");
     }
   
 
-    public IActionResult Delete(Guid id)
+    /*public IActionResult Delete(Guid IdUtilizador)
     {
-        /*var db = new MyDbContext();
+        var db = new MyDbContext();
         var db2 = new MyDbContext();
         var db3 = new MyDbContext();
         var db4 = new MyDbContext();
         var db5 = new MyDbContext();
         var db6 = new MyDbContext();
-        db2.Clientes.RemoveRange(db2.Clientes.Where(u => u.IdCliente == id));
+        db2.Clientes.RemoveRange(db2.Clientes.Where(u => u.IdCliente == IdUtilizador));
         db2.SaveChanges();
-        
-        db3.TalentClientes.RemoveRange(db3.TalentClientes.Where(u => u.IdCliente == id));
+
+        db3..RemoveRange(db3.TalentClientes.Where(u => u.IdCliente == id));
         db3.SaveChanges();
 
-        var props = db6.Proposta.Where(u => u.IdCliente == id).ToList();
+        var props = db6.Propostas.Where(u => u.IdCliente == IdUtilizador).ToList();
         foreach (var prop in props)
         {
-            db5.PropSkills.RemoveRange(db5.PropSkills.Where(u => u.IdProp == prop.IdProposta));
+            db5.Skillsproposta.RemoveRange(db5.Skillsproposta.Where(u => u.IdPropostas == prop.IdPropostas));
             db5.SaveChanges();
         }
-        //db5.PropSkills.Remove(db5.PropSkills.Where(p => p.IdProp == ));
-        //db5.SaveChanges();
         
-        db4.Proposta.RemoveRange(db4.Proposta.Where(u => u.IdCliente == id));
+        db4.Propostas.RemoveRange(db4.Propostas.Where(u => u.IdCliente == IdUtilizador));
         db4.SaveChanges();
         
         
         var db10 = new MyDbContext();
-        var result = new User() { IdUsers = id };
-        db10.Users.Attach(result);
-        db10.Users.Remove(result);
-        db10.SaveChanges();*/
+        var result = new Utilizador() { IdUtilizador = IdUtilizador };
+        db10.Utilizadors.Attach(result);
+        db10.Utilizadors.Remove(result);
+        db10.SaveChanges();
         return RedirectToAction("Index");
-    }
+    }*/
 }

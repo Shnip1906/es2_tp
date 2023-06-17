@@ -43,13 +43,13 @@ public class AdminsController : Controller
         
         return View();
     }
-    public async Task<IActionResult> Edits ([FromForm] Guid id,[FromForm] string nome)
+    public async Task<IActionResult> Edits ([FromForm] Guid id,[FromForm] string NomeAreaPrfossional)
     {
         var db = new MyDbContext();
         var result = db.Areaprofissionals.SingleOrDefault(b => b.IdAreaProfissional == id);
         //ViewBag.teste = result.Nome;
         //return View("teste");
-        result.NomeAreaPrfossional = nome;
+        result.NomeAreaPrfossional = NomeAreaPrfossional;
         db.SaveChanges();
         return RedirectToAction("AreaProfissional");
     }

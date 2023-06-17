@@ -24,11 +24,11 @@ public class RelatorioController : Controller
     {
         return View();
     }
-    public async  Task<IActionResult> RelS([FromForm] string nome)
+    public async  Task<IActionResult> RelS([FromForm] string NomeSkills)
     {
         var value = 0.0;
         var count = 0;
-        var ski = _context.Skills.Where(p => p.NomeSkills == nome).SingleOrDefault();
+        var ski = _context.Skills.Where(p => p.NomeSkills == NomeSkills).SingleOrDefault();
         
         var talent = _context.Skillprofs.Where(p => p.IdSkills == ski.IdSkills).Include(p => p.IdPerfilNavigation).ToList();
         foreach (var tal in talent)
@@ -72,8 +72,6 @@ public class RelatorioController : Controller
     }
     public async  Task<IActionResult> ListarTalentosSkill(Guid id)
     {
-        //var ski = _context.Skils.Where(p => p.IdSki == id).SingleOrDefault();
-        
         var myDbContext = _context.Skillprofs.Where(f => f.IdSkills == id).Include(u => u.IdPerfilNavigation);
         
         return View(await myDbContext.OrderBy(u => u.IdPerfilNavigation!.NomePerfil).ToListAsync());

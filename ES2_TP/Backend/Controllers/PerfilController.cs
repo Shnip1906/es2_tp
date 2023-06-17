@@ -149,7 +149,8 @@ public class PerfilController : Controller
     {
         var myDbContext = _context.Experiencia;
         ViewBag.id = id;
-        return View(await myDbContext.Where(u => u.IdExperiencia == id).OrderBy(u => u.IdExperiencia == id).ToListAsync());
+        //return View(await myDbContext.Where(u => u.IdExperiencia == id).OrderBy(u => u.IdExperiencia == id).ToListAsync());
+        return View(await myDbContext.Where(u => u.IdPerfil == id).ToListAsync());
     }
 
     public async Task<IActionResult> ExperienciaPerfilUtilizador(Guid id)
@@ -172,19 +173,20 @@ public class PerfilController : Controller
     }
 
     // asp-action form Criar Experiencia
-    public async Task<IActionResult> CriarExps(int id,[FromForm] string nomeExp, [FromForm] string Empresa,[FromForm] int AnoInicial, [FromForm] int AnoFinal)
+    public async Task<IActionResult> CriarExps([FromForm] Guid Id,[FromForm] string NomeExperiencia, [FromForm] string NomeEmpresa,[FromForm] int Anoinicio, [FromForm] int Anofim)
     {
-        if (AnoInicial > AnoFinal)
+        if (Anoinicio > Anofim)
         {
             return View("ErroView");
         }
         var db = new MyDbContext();
         Experiencium exp = new Experiencium();
-        //exp.id = id;
-        exp.NomeExperiencia = nomeExp;
-        exp.NomeEmpresa = Empresa;
-        exp.Anoinicio = AnoInicial;
-        exp.Anofim = AnoFinal;
+        exp.NomeExperiencia = NomeExperiencia;
+        exp.NomeEmpresa = NomeEmpresa;
+        exp.Anoinicio = Anoinicio;
+        exp.Anofim = Anofim;
+        exp.IdPerfil = Id;
+        exp.Continuo = Anofim == 2023;
         db.Experiencia.Add(exp);
         db.SaveChanges();
         return RedirectToAction("ListarPerfis");
@@ -233,7 +235,7 @@ public class PerfilController : Controller
     public async Task<IActionResult> ListarSkillTalento(Guid Id)
     {
         {
-            var myDbContext = _context.Skillprofs.Where(t => t.IdPerfil == Id).Include(t=>t.IdSkills);
+            var myDbContext = _context.Skillprofs.Where(t => t.IdPerfil == Id).Include(t=>t.IdSkillsNavigation);
             // ViewBag.id = id;
             return View(await myDbContext.OrderBy(u =>u.IdPerfil == Id).ToListAsync());
         }
@@ -260,13 +262,13 @@ public class PerfilController : Controller
         
         var item2 = new List<SelectListItem>();
 
-        foreach ( Perfil talento in _context.Perfils )
+        foreach ( Perfil p in _context.Perfils )
         {
-            item.Add(new SelectListItem(text: talento.NomePerfil, value:talento.IdPerfil.ToString()));
+            item2.Add(new SelectListItem(text: p.NomePerfil, value:p.IdPerfil.ToString()));
         }
 
         ViewData["IdPerfil"] = new SelectList(_context.Perfils, "IdPerfil", "NomePerfil");
-        
+
         return View();
     }
     
@@ -293,15 +295,15 @@ public class PerfilController : Controller
         return View();
     }
     
-    public IActionResult CriaSKT([FromForm] int Anos, [FromForm] Guid fkIdSkill,[FromForm] Guid fkIdTalento)
+    public IActionResult CriaSKT([FromForm] int Nhoras, [FromForm] Guid IdSkills,[FromForm] Guid IdPerfil)
     {
 
         var db = new MyDbContext();
         
         Skillprof skillprof = new Skillprof();
-        skillprof.Nhoras = Anos;
-        skillprof.IdSkills= fkIdSkill;
-        skillprof.IdPerfil = fkIdTalento;
+        skillprof.Nhoras = Nhoras;
+        skillprof.IdSkills= IdSkills;
+        skillprof.IdPerfil = IdPerfil;
         db.Skillprofs.Add(skillprof);
         db.SaveChanges();
 
@@ -327,8 +329,11 @@ public class PerfilController : Controller
 
         return RedirectToAction("ListarSkillPerfilUtilizador", new RouteValueDictionary { { "id", IdPerfil } });
     }
-    public async Task<IActionResult> ListarPerfil2(string id, string searchTalento)
-
+    /*public async Task<IActionResult> ListarPerfil2(string id, string searchTalento)
+    {
+        var myDbContext = _context.Perfils;
+        return View(await myDbContext.OrderBy(u => u.NomePerfil).ToListAsync());
+    }*/
     public async Task<IActionResult> ListarPerfilUserManager(Guid id, string searchTalento)
     {
         var myDbContext = _context.Perfils;

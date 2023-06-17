@@ -13,6 +13,7 @@
         <th> 
             Skills
         </th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -22,7 +23,7 @@
                 @Html.DisplayFor(modelItem => item.NomeSkills)
             </td>
             <td>
-                <a asp-action="ListarTalentosSkill" asp-route-id="@item.IdSkills">Listar Talentos</a>
+                <a asp-action="ListarTalentosSkill" asp-route-id="@item.IdSkills">Listar Perfis</a>
             </td>
         </tr>
     }
