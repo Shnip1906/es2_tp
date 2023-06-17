@@ -1,3 +1,4 @@
+using Backend.Models;
 using BusinessLogic.Context;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -23,10 +24,10 @@ public class admin : ControllerBase
             return Ok(data);
         }
         
-        [HttpGet("edit/{id}")]
-        public IActionResult Edit([FromRoute] Guid? id)
+        [HttpGet]
+        public async Task<IActionResult> Edit([FromRoute] Guid id)
         {
-            if (!id.HasValue)
+            if (id.Equals(null))
             {
                 return BadRequest("Invalid ID"); // Return a 400 Bad Request response if the ID is not provided
             }
@@ -44,6 +45,28 @@ public class admin : ControllerBase
             };
 
             return Ok(model); // Return the entity in the response body
+        }
+        
+        [HttpPost]
+        public IActionResult Edits([FromBody] AreaProfissionalModel areaProfissionalModel)
+        {
+            if (areaProfissionalModel == null)
+            {
+                return BadRequest("Invalid model"); // Return a 400 Bad Request response if the model is null
+            }
+
+            var db = new MyDbContext();
+            var result = db.Areaprofissionals.SingleOrDefault(b => b.IdAreaProfissional == areaProfissionalModel.IdAreaProfissional);
+
+            if (result == null)
+            {
+                return NotFound("Entity not found"); // Return a 404 Not Found response if the entity is not found
+            }
+
+            result.NomeAreaPrfossional = areaProfissionalModel.NomeAreaPrfossional;
+            db.SaveChanges();
+
+            return Ok(); // Redirect to the "AreaProfissional" action
         }
 
 }
