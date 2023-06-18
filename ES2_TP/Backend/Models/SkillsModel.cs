@@ -10,4 +10,6 @@ public class SkillsModel
 
     public Guid? IdAreaProfissional { get; set; }
     
+    public string NomeAreaProfissional { get; set; } = null!;
+    
 }
