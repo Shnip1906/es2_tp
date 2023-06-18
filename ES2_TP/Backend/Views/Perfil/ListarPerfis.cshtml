@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BusinessLogic.Entities.Perfil>
+﻿@model List<PerfisModel>?
 
 @{
     ViewBag.Title = "Index"; 
@@ -11,16 +11,16 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.NomePerfil)
+                <strong>Nome de Perfil</strong>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Pais)
+                <strong>País</strong>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Email)
+                <strong>Email</strong>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Precohora)
+                <strong>Preço Hora</strong>
                 </th>
             <th></th>
         </tr>

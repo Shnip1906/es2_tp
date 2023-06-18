@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BusinessLogic.Entities.Experiencium>
+﻿@model List<ExperienciaModel>?
 
 @{
     ViewBag.Title = "Index"; 
@@ -14,16 +14,16 @@
     <thead>
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.NomeExperiencia)
+           <strong>Nome da Experiência</strong>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.NomeEmpresa)
+            <strong>Nome da Empresa</strong>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Anoinicio)
+            <strong>Ano de Início</strong>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Anofim)
+            <strong>Ano de Fim</strong>
         </th>
         <th></th>
     </tr>
