@@ -209,4 +209,36 @@ public class perfil: ControllerBase
     
         return Ok(skFinal);
     }
+    
+    [HttpGet]
+    public async Task<IActionResult> ListarPerfilSkill([FromRoute] Guid? id)
+    {
+        if (id == Guid.Empty)
+        {
+            return BadRequest("Invalid ID");
+        }
+
+        var props = await _context.Skillprofs
+            .Where(u => u.IdSkills == id)
+            .ToListAsync();
+
+        var perfilIds = props.Select(p => p.IdPerfil).ToList();
+
+        var perfis = await _context.Perfils
+            .Where(m => perfilIds.Contains(m.IdPerfil))
+            .OrderBy(m => m.IdPerfil)
+            .ToListAsync();
+
+        var perfilFinal = perfis.Select(sk => new PerfisModel
+        {
+            IdPerfil = sk.IdPerfil,
+            NomePerfil = sk.NomePerfil,
+            Pais = sk.Pais,
+            Email = sk.Email,
+            Precohora = sk.Precohora
+        }).ToList();
+
+        return Ok(perfilFinal);
+    
+    }
 }
