@@ -1,5 +1,5 @@
 @using Microsoft.AspNetCore.Http
-@model IEnumerable<BusinessLogic.Entities.Skillspropostum>
+@model List<SkillsPropostaModel>?
 @{
     ViewBag.Title = "Skills";
     Layout = "~/Views/Shared/_Layout5.cshtml";
@@ -23,7 +23,7 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.IdSkillsNavigation.NomeSkills)
+                @Html.DisplayFor(modelItem => item.nomeSkill)
             </td>
 
             <td>

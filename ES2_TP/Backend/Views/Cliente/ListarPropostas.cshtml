@@ -1,4 +1,4 @@
-@model IEnumerable<BusinessLogic.Entities.Proposta>
+@model List<PropostaModel>?
 
 @{
     ViewBag.Title = "Index";
@@ -12,10 +12,10 @@
     <thead>
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.NomePropostas)
+            <strong>Nome da Proposta</strong>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Ntotalhoras)
+            <strong>Número Total de Horas</strong>
         </th>
         <th></th>
     </tr>
