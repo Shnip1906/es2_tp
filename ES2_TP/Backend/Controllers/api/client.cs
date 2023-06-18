@@ -110,7 +110,7 @@ public class client : ControllerBase
     }
 
     [HttpDelete]
-    public IActionResult EliminarCliente(Guid id)
+    /*public IActionResult EliminarCliente(Guid id)
     {
         var db = new MyDbContext();
         var db2 = new MyDbContext();
@@ -118,27 +118,63 @@ public class client : ControllerBase
         var db4 = new MyDbContext();
         var db5 = new MyDbContext();
         var db6 = new MyDbContext();
-    
-        db2.Clientes.RemoveRange(db2.Clientes.Where(u => u.IdCliente == id));
+        
+        var db7 = new MyDbContext();
+        var result = db.Clientes.SingleOrDefault(b => b.IdUtilizadorCliente == id);
+        
+        db2.Clientes.RemoveRange(db2.Clientes.Where(u => u.IdCliente == result.IdCliente));
         db2.SaveChanges();
 
-        var props = db6.Propostas.Where(u => u.IdCliente == id).ToList();
+        var props = db6.Propostas.Where(u => u.IdCliente == result.IdCliente).ToList();
         foreach (var prop in props)
         {
             db5.Skillsproposta.RemoveRange(db5.Skillsproposta.Where(u => u.IdPropostas == prop.IdPropostas));
             db5.SaveChanges();
         }
     
-        db4.Propostas.RemoveRange(db4.Propostas.Where(u => u.IdCliente == id));
+        db4.Propostas.RemoveRange(db4.Propostas.Where(u => u.IdCliente == result.IdCliente));
         db4.SaveChanges();
-    
-        var result = new Utilizador() { IdUtilizador = id };
-        db.Utilizadors.Attach(result);
-        db.Utilizadors.Remove(result);
+        
+        var resultado = new Utilizador() { IdUtilizador = (Guid)result.IdUtilizadorCliente };
+        db.Utilizadors.Attach(resultado);
+        db.Utilizadors.Remove(resultado);
         db.SaveChanges();
-    
+        
+        return Ok();
+    }*/
+    public IActionResult EliminarCliente(Guid id)
+    {
+        using (var db = new MyDbContext())
+        {
+            var result = db.Clientes.SingleOrDefault(b => b.IdUtilizadorCliente == id);
+            if (result == null)
+            {
+                // Handle the case when the result is null
+                return NotFound();
+            }
+
+            db.Clientes.Remove(result);
+            db.SaveChanges();
+
+            var props = db.Propostas.Where(u => u.IdCliente == result.IdCliente).ToList();
+            foreach (var prop in props)
+            {
+                var skills = db.Skillsproposta.Where(u => u.IdPropostas == prop.IdPropostas).ToList();
+                db.Skillsproposta.RemoveRange(skills);
+            }
+
+            db.Propostas.RemoveRange(props);
+            db.SaveChanges();
+
+            var usuario = new Utilizador { IdUtilizador = (Guid)result.IdUtilizadorCliente };
+            db.Utilizadors.Attach(usuario);
+            db.Utilizadors.Remove(usuario);
+            db.SaveChanges();
+        }
+
         return Ok();
     }
+
     
     [HttpGet]
     public async Task<IActionResult> ListarPropostas(Guid id)

@@ -38,7 +38,7 @@ public class UserManagerController : Controller{
     
     public async Task<IActionResult> Index()
     {
-        HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:5052/users/ListarClientes");
+        HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:5052/users/ListarUtilizadores");
 
         // Check if the API request was successful
         if (response.IsSuccessStatusCode)
@@ -79,13 +79,14 @@ public class UserManagerController : Controller{
         return RedirectToAction("Index");
     }*/
     
-    public async Task<IActionResult> Registar([FromForm] string nome, [FromForm] string username,[FromForm] string password)
+    public async Task<IActionResult> Registar([FromForm] string NomeUtilizador, [FromForm] string Username,[FromForm] string Password)
     {
         var userModel = new UsersModel()
         {
-            nomeUtilizador = nome,
-            username = username,
-            password = password
+            nomeUtilizador = NomeUtilizador,
+            username = Username,
+            password = Password,
+            tipoUtilizador = 3
         };
         
         var json = Newtonsoft.Json.JsonConvert.SerializeObject(userModel);

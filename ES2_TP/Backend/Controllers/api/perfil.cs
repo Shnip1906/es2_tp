@@ -32,7 +32,7 @@ public class perfil: ControllerBase
         var db2 = new MyDbContext();
         var db3 = new MyDbContext();
         var db4 = new MyDbContext();
-        db2.Skillprofs.RemoveRange(db2.Skillprofs.Where(u => u.IdSkills == id));
+        db2.Skillprofs.RemoveRange(db2.Skillprofs.Where(u => u.IdPerfil == id));
         db2.SaveChanges();
 
         var result = new Perfil { IdPerfil = id };

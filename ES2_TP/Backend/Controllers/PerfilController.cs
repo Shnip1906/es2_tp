@@ -107,6 +107,26 @@ public class PerfilController : Controller
                     
             return RedirectToAction("ListarPerfisAdmin");
         }
+    
+    public async Task<IActionResult> EliminarPerfilUtilizador(Guid id)
+    {
+        var result = await _httpClient.DeleteAsync($"http://localhost:5052/perfil/EliminarPerfil/{id}");
+            
+        // Check the response status
+        if (result.IsSuccessStatusCode)
+        {
+            Console.WriteLine("Client deleted successfully.");
+        }
+        else
+        {
+            Console.WriteLine($"An error occurred: {result.StatusCode}");
+            string errorMessage = await result.Content.ReadAsStringAsync();
+            ViewBag.erro = errorMessage;
+            return View("ErrorView");
+        }
+                    
+        return RedirectToAction("ListarPerfisUtilizador");
+    }
 
     public IActionResult CriarPerfil()
     {
@@ -368,7 +388,7 @@ public class PerfilController : Controller
         db.SaveChanges();
         return RedirectToAction("ListarPerfis");
     }*/
-    public async Task<IActionResult> RegistarPerfil([FromForm] string NomePerfil, [FromForm] string Pais, [FromForm] string Email,
+    public async Task<IActionResult> RegistarPerfilAdmin([FromForm] string NomePerfil, [FromForm] string Pais, [FromForm] string Email,
         [FromForm] double Precohora)
     {
         
@@ -390,6 +410,7 @@ public class PerfilController : Controller
         if (result.IsSuccessStatusCode)
         {
             Console.WriteLine("Entity updated successfully");
+            return RedirectToAction("ListarPerfisAdmin");
         }
         else
         {
@@ -398,7 +419,8 @@ public class PerfilController : Controller
             ViewBag.erro = errorMessage;
             return View("ErrorView");
         }
-        return RedirectToAction("ListarPerfisAdmin");
+        
+        
     }
     
     /*public IActionResult RegistarPerfilUtilizador([FromForm] string NomePerfil, [FromForm] string Pais, [FromForm] string Email,
@@ -1100,15 +1122,15 @@ public class PerfilController : Controller
         return RedirectToAction("ListarPerfilUserManager");
     }*/
     
-    public async Task<IActionResult> RegistarPerfilUM([FromForm] string nome, [FromForm] string pais, [FromForm] string email,
-        [FromForm] double precohora)
+    public async Task<IActionResult> RegistarPerfilUM([FromForm] string NomePerfil, [FromForm] string Pais, [FromForm] string Email,
+        [FromForm] double Precohora)
     {
         var perfilModel = new PerfisModel()
         {
-            NomePerfil = nome,
-            Pais = pais,
-            Email = email,
-            Precohora = precohora
+            NomePerfil = NomePerfil,
+            Pais = Pais,
+            Email = Email,
+            Precohora = Precohora
         };
         
         var json = Newtonsoft.Json.JsonConvert.SerializeObject(perfilModel);
@@ -1227,14 +1249,14 @@ public IActionResult CriarSkillPerfilUm()
         return RedirectToAction("ListarPerfilUserManager");
     }*/
 
-    public async Task<IActionResult> CriaSKTUM([FromForm] int Anos, [FromForm] Guid fkIdSkill,[FromForm] Guid fkIdTalento)
+    public async Task<IActionResult> CriaSKTUM([FromForm] int Nhoras, [FromForm] Guid IdSkills,[FromForm] Guid IdPerfil)
     {
 
         var skillModel = new SkillsProfModel()
         {
-            Nhoras = Anos,
-            IdSkills = fkIdSkill,
-            IdPerfil = fkIdTalento
+            Nhoras = Nhoras,
+            IdSkills = IdSkills,
+            IdPerfil = IdPerfil
         };
         
         var json = Newtonsoft.Json.JsonConvert.SerializeObject(skillModel);

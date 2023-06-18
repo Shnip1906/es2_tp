@@ -1,4 +1,4 @@
-@model System.Collections.Generic.IEnumerable<BusinessLogic.Entities.Utilizador>
+@model List<UsersModel>?
 
 @{
     ViewData["Title"] = "Index User";
@@ -33,10 +33,10 @@
         {
             <tr >
                 <td>
-                    @Html.DisplayFor(modelItem => item.NomeUtilizador)
+                    @Html.DisplayFor(modelItem => item.nomeUtilizador)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Username)
+                    @Html.DisplayFor(modelItem => item.username)
                 </td>
 
 

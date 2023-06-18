@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BusinessLogic.Entities.Utilizador>
+﻿@model List<UsersModel>?
 
 @{
     ViewBag.Title = "Index"; 
@@ -24,13 +24,13 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.NomeUtilizador)
+                <strong>Nome de Utilizador</strong>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Username)
+                <strong>Username</strong>
             </th>
            <th>
-                @Html.DisplayNameFor(model => model.TipoUtilizador)
+                <strong>Tipo de Utilizador</strong>
             </th>
             <th></th>
         </tr>
@@ -39,17 +39,17 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.NomeUtilizador)
+                @Html.DisplayFor(modelItem => item.nomeUtilizador)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Username)
+                @Html.DisplayFor(modelItem => item.username)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TipoUtilizador)
+                @Html.DisplayFor(modelItem => item.tipoUtilizador)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.IdUtilizador">Editar</a>
-                <!--a asp-action="Delete" asp-route-id="@item.IdUtilizador">Deletar</!--a-->
+                <a asp-action="Edit" asp-route-id="@item.idUtilizador">Editar</a>
+                <!--a asp-action="Delete" asp-route-id="@item.idUtilizador">Deletar</!--a-->
             </td>
         </tr>
 }

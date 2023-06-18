@@ -22,13 +22,13 @@
     <thead>
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.NomeUtilizador)
+            <strong>Nome de Utilizador</strong>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Username)
+            <strong>Username</strong>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Password)
+            <strong>Password</strong>
         </th>
          
         <th></th>
@@ -38,13 +38,13 @@
     @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.NomeUtilizador)
+                @Html.DisplayFor(modelItem => item.nomeUtilizador)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Username)
+                @Html.DisplayFor(modelItem => item.username)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Password)
+                @Html.DisplayFor(modelItem => item.password)
             </td>
      
           
