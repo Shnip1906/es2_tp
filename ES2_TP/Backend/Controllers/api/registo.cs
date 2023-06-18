@@ -23,6 +23,12 @@ public class registo: ControllerBase
             return BadRequest("Invalid model");
         }
         
+        var exist = _context.Utilizadors.FirstOrDefault(p => p.Username == model.username);
+        if (exist != null)
+        {
+            return BadRequest("O username já existe no sistema!!!");
+        }
+        
         var utilizador = new Utilizador()
         {
             NomeUtilizador = model.nomeUtilizador,
