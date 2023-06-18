@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Http
-@model IEnumerable<BusinessLogic.Entities.Skill>
+@model List<SkillsModel>?
 @{
     ViewBag.Title = "Pesquisa";
     Layout = "~/Views/Shared/_Layout2.cshtml";
@@ -13,6 +13,7 @@
         <th> 
             Skills
         </th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -22,7 +23,7 @@
                 @Html.DisplayFor(modelItem => item.NomeSkills)
             </td>
             <td>
-                <a asp-action="ListarTalentosSkill" asp-route-id="@item.IdSkills">Listar Talentos</a>
+                <a asp-action="ListarTalentosSkill" asp-route-id="@item.IdSkills">Listar Perfis</a>
             </td>
         </tr>
     }

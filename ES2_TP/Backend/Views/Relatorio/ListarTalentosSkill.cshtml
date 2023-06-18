@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BusinessLogic.Entities.Skillprof>
+﻿@model List<PerfisModel>?
 
 @{
     ViewBag.Title = "Relatório";
@@ -11,16 +11,16 @@
     <thead>
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.IdPerfilNavigation.NomePerfil)
+            <strong>Nome do Perfil</strong>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.IdPerfilNavigation.Pais)
+            <strong>País</strong>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.IdPerfilNavigation.Email)
+            <strong>Email</strong>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.IdPerfilNavigation.Precohora)
+            <strong>Preço Hora</strong>
         </th>
         <th></th>
     </tr>
@@ -29,16 +29,16 @@
     @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.IdPerfilNavigation.NomePerfil)
+                @Html.DisplayFor(modelItem => item.NomePerfil)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdPerfilNavigation.Pais)
+                @Html.DisplayFor(modelItem => item.Pais)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdPerfilNavigation.Email)
+                @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdPerfilNavigation.Precohora)
+                @Html.DisplayFor(modelItem => item.Precohora)
             </td>
             
         </tr>

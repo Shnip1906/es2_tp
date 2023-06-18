@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BusinessLogic.Entities.Skillprof>
+﻿@model List<SkillsProfModel>?
 @{
     ViewBag.Title = "Skills";
     Layout = "~/Views/Shared/_Layout2.cshtml";
@@ -15,8 +15,6 @@
         <th>
             Skill
         </th>
-       
-        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -28,7 +26,7 @@
             </td>
 
             <td>
-                @Html.DisplayFor(modelItem => item.IdSkillsNavigation!.NomeSkills)
+                @Html.DisplayFor(modelItem => item.NomeSkills)
             </td>
      </tr>
     }

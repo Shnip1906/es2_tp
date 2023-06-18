@@ -1,5 +1,5 @@
 @using Microsoft.AspNetCore.Http
-@model IEnumerable<BusinessLogic.Entities.Skillprof>
+@model List<PerfisModel>?
 @{
     ViewBag.Title = "Skills";
     Layout = "~/Views/Shared/_Layout5.cshtml";
@@ -30,16 +30,16 @@
 
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.IdPerfilNavigation.NomePerfil)
+                @Html.DisplayFor(modelItem => item.NomePerfil)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdPerfilNavigation.Pais)
+                @Html.DisplayFor(modelItem => item.Pais)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdPerfilNavigation.Email)
+                @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdPerfilNavigation.Precohora)
+                @Html.DisplayFor(modelItem => item.Precohora)
             </td>
         </tr>
     }

@@ -1,4 +1,4 @@
-@model IEnumerable<BusinessLogic.Entities.Utilizador>
+@model List<UsersModel>?
 @{
     ViewBag.Title = "Index"; 
     Layout = "~/Views/Shared/_Layout5.cshtml";
@@ -25,15 +25,15 @@
     @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.NomeUtilizador)
+                @Html.DisplayFor(modelItem => item.nomeUtilizador)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Username)
+                @Html.DisplayFor(modelItem => item.username)
             </td>
             <td>
-                <a asp-action="EditarCliente" asp-route-id="@item.IdUtilizador">Editar</a> |
-                <a asp-action="EliminarCliente" asp-route-id="@item.IdUtilizador">Deletar</a> |
-                <a asp-action="ListarPropostas" asp-route-id="@item.IdUtilizador">Propostas</a> |
+                <a asp-action="EditarCliente" asp-route-id="@item.idUtilizador">Editar</a> |
+                <a asp-action="EliminarCliente" asp-route-id="@item.idUtilizador">Deletar</a> |
+                <a asp-action="ListarPropostas" asp-route-id="@item.idUtilizador">Propostas</a> |
             </td>
         </tr>
     }
